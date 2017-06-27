@@ -77,8 +77,8 @@ function checkMatch(){
     matchFound(flipped[1]);
   } else {
     // finally call flipTile on both elements
-    flipTile(flipped[0]);
     flipTile(flipped[1]);
+    flipTile(flipped[0]);
   }
 
   // clear array of flipped elements
@@ -92,14 +92,13 @@ function checkMatch(){
 
 // if match is found
 function matchFound(elementId){
-  var clickedTile = document.getElementById('elementId');
+  var clickedTile = document.getElementById(elementId);
   // subtract from remaining tiles
   tilesRemain --;
   // deactivates tile
   tile(elementId).active = false;
   // TODO: visual cue of deactivated state ie opacity for now
-  clickedTile.setAttribute('opacity','0.25');
-
+  clickedTile.setAttribute('style', 'opacity: 0.25');
 }
 
 // HELPER FUNCTIONS =====

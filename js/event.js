@@ -12,11 +12,12 @@ function eventListener(){
 // event handler
 function eventHandler(event){
   var elementId = event.target.getAttribute('id');
+  // DELETEME
   console.log(elementId);
   if(flipped.length == 2){
     checkMatch();
   } else if (flipped.includes(elementId) || !(tile(elementId).active) || !(tile(elementId))){
-    // test
+    // DELETEME
     console.log('click on a real tile!');
   } else {
     flipTile(elementId);
