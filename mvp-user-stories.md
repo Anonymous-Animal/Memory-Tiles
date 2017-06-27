@@ -22,9 +22,9 @@ Same
 
 * As a mother, Jennifer wants her son to pick up on remembering the locations of matching objects so that he can help her with the chores around the house.
 
-## Stretch goals:
-
 * As a user Mr. Rogers would like to play a game that has persistence so he can put it down and pick it back up again.
+
+## Stretch goals:
 
 * Since Nancy owns a plethora of devices, she would love the ability to switch between playing on her desktop and phone so that she can enjoy a game everywhere she is.
 
@@ -40,6 +40,8 @@ Same
 
 * As a cautious user, Pat wants to be punished for guessing the wrong tiles because in real life, she won’t get a second chance with a poison cookie.
 
-* As a user, Crazy Eddie would like for there to be real consequences for picking the right and wrong tiles, to simulate a real world experience.
+* ~~As a user, Crazy Eddie would like for there to be real consequences for picking the right and wrong tiles, to simulate a real world experience.~~
 
-* As a user, Pat wants to know that if she kills someone in the game they die in real life.  For efficiency.
+* ~~As a user, Pat wants to know that if she kills someone in the game they die in real life.  For efficiency.~~
+
+_Per advise from the legal team, the dev team has decided that due to ethical reasons these last two user stories should no longer be pursued_
