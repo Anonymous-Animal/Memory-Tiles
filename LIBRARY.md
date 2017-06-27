@@ -29,10 +29,6 @@ An array of Tiles placed in random sequence.
     * **this.active** = true;
 
 ### Core Functions:
-shuffle
-tile
-checkMatch
-flipTile
 
 * **shuffle (input)**
 returns a shuffled version of the input array
@@ -45,7 +41,7 @@ Afterward, call flipTile on both elements, and then clear the array
 If elementID is not in flip array, reveal the card and add to array
 If it is in flip array, return the image to default
 * **matchFound (array)**
-Iterate points, set object.active = false, and change opacity.
+Iterate points to current player, set object.active = false, and change opacity.
 
 ### Misc Sources
 * Generate Array of sequential numbers:  https://stackoverflow.com/questions/3895478/does-javascript-have-a-method-like-range-to-generate-an-array-based-on-suppl
