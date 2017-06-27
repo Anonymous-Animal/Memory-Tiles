@@ -17,11 +17,13 @@
   height: 500px;
 }
 
-#inputarea * {
+#inputarea *, #outputarea * {
   display: block;
   margin: auto;
   text-align: center;
 }
+
+
 
 main {
   border: 5px solid black;
