@@ -94,7 +94,7 @@ function flipTile(elementID){
 }
 
 // if match is found
-matchFound(elementID){
+function matchFound(elementID){
   // subtract from remaining tiles
   tilesRemain --;
   // deactivates tile
