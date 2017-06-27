@@ -57,7 +57,12 @@ var randomTiles = shuffle(sortedTiles.slice(0));
 
 // returns tile object
 function tile(elementID){
-  returns (randomTiles[parseInt(elementID.slice(4) - 1)]);
+  // error handling
+  if(elementID.length < 4 || elementID.substring[0,4] != 'tile'){
+    return null;
+  } else {
+    return (randomTiles[parseInt(elementID.slice(4) - 1)]);
+  }
 }
 
 // checks to see if tiles are matching
