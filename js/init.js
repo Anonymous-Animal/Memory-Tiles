@@ -3,7 +3,7 @@
 // GLOBAL VAR INIT =====
 
 // size of the grid
-var gridSize = 4;
+var gridSize = 16;
 // tiles remaining after clicked
 var tilesRemain = gridSize;
 // the total number of turns for the entire game
@@ -34,20 +34,20 @@ var currentPlayer = new Player('Test Player');
 var sortedTiles = [
   new Tile('kitten_01.jpg'),
   new Tile('kitten_02.jpg'),
-  // new Tile('kitten_03.jpg'),
-  // new Tile('kitten_04.jpg'),
-  // new Tile('kitten_05.jpg'),
-  // new Tile('kitten_06.jpg'),
-  // new Tile('kitten_07.jpg'),
-  // new Tile('kitten_08.jpg'),
+  new Tile('kitten_03.jpg'),
+  new Tile('kitten_04.jpg'),
+  new Tile('kitten_05.jpg'),
+  new Tile('kitten_06.jpg'),
+  new Tile('kitten_07.jpg'),
+  new Tile('kitten_08.jpg'),
   new Tile('kitten_01.jpg'),
-  new Tile('kitten_02.jpg')
-  // new Tile('kitten_03.jpg'),
-  // new Tile('kitten_04.jpg'),
-  // new Tile('kitten_05.jpg'),
-  // new Tile('kitten_06.jpg'),
-  // new Tile('kitten_07.jpg'),
-  // new Tile('kitten_08.jpg')
+  new Tile('kitten_02.jpg'),
+  new Tile('kitten_03.jpg'),
+  new Tile('kitten_04.jpg'),
+  new Tile('kitten_05.jpg'),
+  new Tile('kitten_06.jpg'),
+  new Tile('kitten_07.jpg'),
+  new Tile('kitten_08.jpg')
 ];
 
 // shuffle the array of tiles
@@ -56,12 +56,13 @@ var randomTiles = shuffle(sortedTiles.slice(0));
 // FUNCTIONS =====
 
 // returns tile object
-function tile(elementID){
+function tile(elementId){
   // error handling
-  if(elementID.length < 4 || elementID.substring[0,4] != 'tile'){
+  if(elementId.length < 4){
     return null;
   } else {
-    return (randomTiles[parseInt(elementID.slice(4) - 1)]);
+    console.log(randomTiles[parseInt(elementId.slice(4) - 1)]);
+    return randomTiles[parseInt(elementId.slice(4) - 1)];
   }
 }
 
@@ -88,23 +89,17 @@ function checkMatch(){
   checkGameOver();
 }
 
-// flips tile
-function flipTile(elementID){
-  if(!flipped.includes(elementID)){
-    // TODO: reveal card
-    // TODO: add to array
-  } else {
-    // TODO: return img to unflipped
-  }
-}
 
 // if match is found
-function matchFound(elementID){
+function matchFound(elementId){
+  var clickedTile = document.getElementById('elementId');
   // subtract from remaining tiles
   tilesRemain --;
   // deactivates tile
-  tile(elementID).active = false;
-  // TODO: visual cue of deactivated state ie opacity
+  tile(elementId).active = false;
+  // TODO: visual cue of deactivated state ie opacity for now
+  clickedTile.setAttribute('opacity','0.25');
+
 }
 
 // HELPER FUNCTIONS =====
