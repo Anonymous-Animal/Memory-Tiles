@@ -11,13 +11,26 @@
       <header id="titlearea">
         <h1>TITLE</h1>
       </header>
-      <main id="inputarea">
-        <form class="" action="index.html" method="post">
-          <label for="">ENTER NAME HERE</label>
-          <input type="text" name="" value="">
-          <button type="button" name="button">SUBMIT</button>
-        </form>
+      <main>
+        <div id="inputArea">
+          <form class="" action="index.html" method="post">
+            <label for="">ENTER NAME HERE</label>
+            <input type="text" id="inputName">
+            <button type="button" id="inputButton">SUBMIT</button>
+          </form>
+        </div>
+        <div id="outputArea">
+          <h2>Hello, <span id="userName"></span></h2>
+          <h2>Directions to play the game</h2>
+          <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+
+          <hr />
+          <form action="./main.html">
+            <input type="submit" id="startButton" value="START" />
+          </form>
+        </div>
       </main>
     </div>
+  <script src="js/home.js"></script>
   </body>
 </html>

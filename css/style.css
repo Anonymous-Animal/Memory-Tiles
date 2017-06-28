@@ -13,16 +13,23 @@
   text-align: center;
 }
 
-#inputarea {
-  height: 500px;
+#inputArea, #outputArea {
+  height: 300px;
 }
 
-#inputarea *, #outputarea * {
+#outputArea {
+  display: none;
+}
+
+#inputArea *, #outputArea * {
   display: block;
   margin: auto;
   text-align: center;
 }
 
+#userName {
+  display: inline-block;
+}
 
 
 main {
