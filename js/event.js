@@ -22,8 +22,7 @@ function eventHandler(event){
   } else {
     flipTile(elementId);
   }
-  document.getElementById(currentPlayer.turnsfield).innerHTML = currentPlayer.turns;
-  document.getElementById(currentPlayer.scorefield).innerHTML = currentPlayer.points;
+  currentPlayer.update();
 }
 
 // flips tile

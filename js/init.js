@@ -12,6 +12,7 @@ var startTurns = gridSize * 2;
 var flipped = [];
 var players = [];
 
+
 // OBJ CONSTRUCTOR =====
 
 // per player
@@ -24,11 +25,15 @@ function Player (name) {
   this.scorefield = 'score_' + this.index;
   this.turns = startTurns;
   this.points = 0;
+  players.push(this);
+}
+
+// updates screen data
+Player.prototype.update = function (){
   document.getElementById(this.namefield).innerHTML = this.name;
   document.getElementById(this.turnsfield).innerHTML = this.turns;
   document.getElementById(this.scorefield).innerHTML = this.points;
-  players.push(this);
-}
+};
 
 // per tile
 function Tile(path){
@@ -37,8 +42,15 @@ function Tile(path){
 }
 
 // construct Player
-new Player('Test Player');
+new Player(getPlayerName());
 var currentPlayer = players[0];
+currentPlayer.update();
+createOrUpdatePlayerInfo();
+// DELETEME test local storage
+console.log(retrievePlayerInfo());
+
+//DELETEME
+console.log(currentPlayer);
 
 // init array of tiles
 var sortedTiles = [
@@ -112,6 +124,11 @@ function matchFound(elementId){
 }
 
 // CRUD Functions =====
+
+// gets player name from local storage
+function getPlayerName(){
+  return sessionStorage.getItem('name');
+}
 
 function createOrUpdatePlayerInfo() {
   var stringifiedPlayerInfo = JSON.stringify(currentPlayer);
