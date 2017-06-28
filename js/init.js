@@ -7,11 +7,20 @@ var gridSize = 16;
 // tiles remaining after clicked
 var tilesRemain = gridSize;
 // the total number of turns for the entire game
-var startTurns = gridSize * 2;
+// var startTurns = gridSize * 2;
+var startHP = 100;
 // array of flipped Tiles
 var flipped = [];
 var exposition = [];
+var idIndex = [];
 
+for (var i = 0; i < gridSize; i++) {
+  if (i < 9) {
+    idIndex.push('tile0' + (i + 1));
+  } else {
+    idIndex.push('tile' + (i + 1));
+  }
+}
 
 // OBJ CONSTRUCTOR =====
 
@@ -19,7 +28,7 @@ var exposition = [];
 function Player (name, index){
   this.name = name;
   this.index = index;
-  this.hp = 100;
+  this.hp = startHP;
   this.pairs = 0;
 }
 
@@ -149,6 +158,26 @@ function checkGameOver(){
     console.log('Game Over!');
   }
 }
+
+
+// in case we ever need to reload tiles, such as when re-loading from saved states
+function refreshTiles () {
+  for (var i = 0; i < gridSize; i++) {
+    var elementId = idIndex[i];
+    clickedTile = document.getElementById(elementId);
+    if (!tile(elementId).active) {
+      clickedTile.setAttribute('src', tile(elementId).path);
+      clickedTile.setAttribute('style', 'opacity: 0.25');
+    } else if (flipped.includes(elementId)) {
+      clickedTile.setAttribute('src', tile(elementId).path);
+      clickedTile.setAttribute('style', 'opacity: 1.0');
+    } else {
+      clickedTile.setAttribute('src', 'temp/facedown.gif');
+      clickedTile.setAttribute('style', 'opacity: 1.0');
+    }
+  }
+}
+
 
 function display () {
   console.log('\n');
