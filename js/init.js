@@ -113,15 +113,33 @@ function matchFound(elementId){
 
 // CRUD Functions =====
 
-function createOrUpdatePlayerInfo () {
+function createOrUpdatePlayerInfo() {
   var stringifiedPlayerInfo = JSON.stringify(currentPlayer);
   localStorage.setItem('player', stringifiedPlayerInfo);
 }
 
-function retrievePlayerInfo () {
+function retrievePlayerInfo() {
   var stringifiedPlayerInfo = localStorage.getItem('player');
   var parsedPlayerInfo = JSON.parse(stringifiedPlayerInfo);
   return parsedPlayerInfo;
+}
+
+function retrievePlayerName() {
+  var playerInfo = retrievePlayerInfo();
+  var playerName = playerInfo.name;
+  return playerName;
+}
+
+function retrieveTurnCount() {
+  var playerInfo = retrievePlayerInfo();
+  var turnCount = playerInfo.turns;
+  return turnCount;
+}
+
+function retrievePoints() {
+  var playerInfo = retrievePlayerInfo();
+  var points = playerInfo.points;
+  return points;
 }
 
 function deletePlayerInfo () {
