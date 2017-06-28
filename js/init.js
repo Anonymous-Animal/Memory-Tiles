@@ -47,7 +47,7 @@ var currentPlayer = players[0];
 currentPlayer.update();
 createOrUpdatePlayerInfo();
 // DELETEME test local storage
-console.log(retrievePlayerInfo());
+// console.log(retrievePlayerInfo());
 
 //DELETEME
 console.log(currentPlayer);
@@ -83,7 +83,7 @@ function tile(elementId){
   if(elementId.length < 4){
     return null;
   } else {
-    console.log(randomTiles[parseInt(elementId.slice(4) - 1)]);
+    // console.log(randomTiles[parseInt(elementId.slice(4) - 1)]);
     return randomTiles[parseInt(elementId.slice(4) - 1)];
   }
 }
@@ -196,7 +196,9 @@ function addPoints(){
 function checkGameOver(){
   if(currentPlayer.turns == 0 || tilesRemain == 0){
     // TODO: trigger game over page
-    window.location.replace('results.html');
+    localStorage.setItem('remain', tilesRemain);
+    createOrUpdatePlayerInfo();
+    window.location.href = 'results.html';
     console.log('Game Over!');
   }
 }
