@@ -1,36 +1,75 @@
+body {
+  background-color: rgb(64, 158, 125)
+}
+
 #mainsection {
+
   display: block;
   width: 70%;
-  margin: auto;
+  margin: 30px auto;
 }
 
 #titlearea {
+  background-color: white;
   border: 5px solid black;
   height: 150px;
 }
 
 #titlearea > h1 {
+  font-family: 'Lobster', cursive;
+  font-size: 3em;
   text-align: center;
+  margin: 0px;
+  padding-top: 40px;
+}
+
+#area {
+  background-color: white;
+  margin-top: 30px;
 }
 
 #inputArea, #outputArea {
   height: 300px;
+  width: 60%;
+  margin: auto;
+}
+
+#inputArea * {
+  display: block;
+  text-align: center;
+}
+
+#inputLabel {
+  font-family: 'Acme', sans-serif;
+  font-size: 2em;
+  margin: 15% auto 0 auto;
+}
+
+#inputName {
+  height: 30px;
+  margin: 5% auto 0 auto;
+}
+
+#inputButton {
+  font-family: 'Quicksand', sans-serif;
+  font-size: 1.5em;
+  width: 20%;
+  height: 40px;
+  margin: 10% auto 0 auto;
 }
 
 #outputArea {
   display: none;
 }
 
-#inputArea *, #outputArea * {
-  display: block;
-  margin: auto;
-  text-align: center;
-}
-
 #userName {
   display: inline-block;
 }
 
+#continue {
+  display: block;
+  margin: 60px auto;
+}
 
 main {
   border: 5px solid black;
