@@ -7,9 +7,28 @@ function nada () {
   // this program does what it says
 }
 
+
+function iAmTheDoctor (name) {
+  exposition.push(name + ' heals you 5 points!');
+  currentPlayer.hp += 5;
+}
+
+function everybodyLives (name) {
+  exposition.push(name + ' heals both parties!');
+  currentPlayer.hp += 50;
+  currentPlayer.opponent.hp += 25;
+}
+
+
+// Bale
+function heroDeserved (name) {
+  exposition.push(name + ' heals you the amount you deserve, but not the amount you need!');
+  currentPlayer.hp += 20;
+}
+
 // flips all cards upside-down
-function upsideDown () {
-  exposition.push('This cat turned your world upside-down!\n\n');
+function upsideDown (name) {
+  exposition.push(name + ' has turned your world upside-down!\n\n');
   for (var i = 0; i < flipped.length; i++) {
     m = idIndex.indexOf(flipped[i]);
     flipped[i] = idIndex[gridSize - m - 1];
@@ -22,4 +41,5 @@ function upsideDown () {
     randomTiles[m] = randomTiles[i];
     randomTiles[i] = t;
   };
+  refreshTiles ();
 }

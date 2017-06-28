@@ -38,10 +38,11 @@ function flipTile(elementId){
     flipped.push(elementId);
   } else {
     // TODO: return img to unflipped
+    tile(elementId).mismatch(tile(elementId).name);
     clickedTile.setAttribute('src', 'temp/facedown.gif');
     // remove element
     // console.log('before: ' + flipped);
-    flipped.splice(flipped.indexOf(elementId), 1);
+    flipped.pop();
     // console.log('after: ' + flipped);
   }
 }

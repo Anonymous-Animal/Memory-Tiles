@@ -47,10 +47,11 @@ function Tile(name, path, match, mismatch, mismatch2){
   // allows methods to be used for matches and mismatches
   this.match = match;
   this.mismatch = function() {
-    mismatch();
+    mismatch(this.name);
     // after the first mismatch happens, the method for mismatch might change
-    this.action = mismatch2;
+    this.action = this.mismatch2;
   };
+  this.mismatch2 = mismatch2;
 }
 
 // construct Player
@@ -61,12 +62,12 @@ var currentPlayer = players[(Math.round(Math.random()))];
 
 // init array of tiles
 var sortedTiles = [
-  new Tile('Christian Bale', 'bale_1.jpg', nada, nada, nada),
-  new Tile('Christian Bale', 'bale_1.jpg', nada, nada, nada),
+  new Tile('Christian Bale', 'bale_1.jpg', heroDeserved, upsideDown, upsideDown),
+  new Tile('Christian Bale', 'bale_1.jpg', heroDeserved, upsideDown, upsideDown),
   new Tile('Chris Colfer', 'colfer_1.jpg', nada, nada, nada),
   new Tile('Chris Colfer', 'colfer_1.jpg', nada, nada, nada),
-  new Tile('Christopher Eccleston', 'eccleston_1.jpg', nada, nada, nada),
-  new Tile('Christopher Eccleston', 'eccleston_1.jpg', nada, nada, nada),
+  new Tile('Christopher Eccleston', 'eccleston_1.jpg', everybodyLives, iAmTheDoctor, iAmTheDoctor),
+  new Tile('Christopher Eccleston', 'eccleston_1.jpg', everybodyLives, iAmTheDoctor, iAmTheDoctor),
   new Tile('Chris Evans', 'evans_1.jpg', nada, nada, nada),
   new Tile('Chris Evans', 'evans_1.jpg', nada, nada, nada),
   new Tile('Chris Evans', 'evans_2.jpg', nada, nada, nada),
@@ -118,6 +119,7 @@ function checkMatch(){
     // if match is found
     matchFound(flipped[0]);
     matchFound(flipped[1]);
+    tile(flipped[0]).match(tile(flipped[0]).name);
     currentPlayer.hp += hpPerMatch;
     currentPlayer.pairs += 1;
     if (tile(flipped[0]).bonus || tile(flipped[1]).bonus) {
@@ -129,6 +131,7 @@ function checkMatch(){
     // finally call flipTile on both elements
     tile(flipped[0]).bonus = 0;
     tile(flipped[1]).bonus = 0;
+    tile(flipped[0]).mismatch(tile(flipped[0]).name);
     flipTile(flipped[1]);
     flipTile(flipped[0]);
     currentPlayer.hp -= hpPerFail;
@@ -156,6 +159,7 @@ function matchFound(elementId){
   // TODO: visual cue of deactivated state ie opacity for now
   clickedTile.setAttribute('style', 'opacity: 0.6');
 }
+
 
 // HELPER FUNCTIONS =====
 
