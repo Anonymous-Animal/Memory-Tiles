@@ -24,7 +24,9 @@
 }
 
 .tile {
-  width: 13%
+  width: 13%;
+  margin: 3px;
+  box-shadow: 4px 4px 4px #888888;
 }
 
 main {
