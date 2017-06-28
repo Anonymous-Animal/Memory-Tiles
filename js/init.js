@@ -20,7 +20,7 @@ var inputName;
 eventListener();
 // event listener function
 function eventListener() {
-  inputButton.addEventListener('click', readInput());
+  inputButton.addEventListener('click', readInput);
 }
 
 function readInput() {
@@ -66,6 +66,8 @@ function Tile(path){
 // construct Player
 new Player(getPlayerName());
 var currentPlayer = players[0];
+//DELETEME
+console.log(currentPlayer);
 
 // init array of tiles
 var sortedTiles = [
