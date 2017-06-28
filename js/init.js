@@ -11,20 +11,32 @@ var startTurns = gridSize * 2;
 // array of flipped Tiles
 var flipped = [];
 var players = [];
+var idIndex = [];
+var playersSaved = [[getPlayerName(), 0, startTurns, 0]];
 
+for (var i = 0; i < gridSize; i++) {
+  if (i < 9) {
+    idIndex.push('tile0' + (i + 1));
+  } else {
+    idIndex.push('tile' + (i + 1));
+  }
+}
 
 // OBJ CONSTRUCTOR =====
 
 // per player
-function Player (name) {
-  this.index = players.length;
+function Player (myArray) {
+  this.name = myArray[0];
+  this.index = myArray[1];
+  this.turns = myArray[2];
+  this.points = myArray[3];
   // add pull name local storage
-  this.name = name;
   this.namefield = 'name_' + this.index;
   this.turnsfield = 'turns_' + this.index;
   this.scorefield = 'score_' + this.index;
-  this.turns = startTurns;
-  this.points = 0;
+  this.saved = function (){
+    return([this.name, this.index, this.turns, this.points])
+  }
   players.push(this);
 }
 
@@ -35,19 +47,12 @@ Player.prototype.update = function (){
   document.getElementById(this.scorefield).innerHTML = this.points;
 };
 
+
 // per tile
 function Tile(path){
   this.path = 'temp/' + path;
   this.active = true;
 }
-
-// construct Player
-new Player(getPlayerName());
-var currentPlayer = players[0];
-currentPlayer.update();
-createOrUpdatePlayerInfo();
-// DELETEME test local storage
-// console.log(retrievePlayerInfo());
 
 //DELETEME
 console.log(currentPlayer);
@@ -74,6 +79,37 @@ var sortedTiles = [
 
 // shuffle the array of tiles
 var randomTiles = shuffle(sortedTiles.slice(0));
+
+
+
+if (localStorage.getItem('reloadAvailable')) {
+  if (!flipped[0]) {
+    flipped = [];
+  }
+  flipped = JSON.parse(localStorage.getItem('flipped'));
+  tilesRemain = localStorage.getItem('tilesRemain');
+  playersSaved = JSON.parse(localStorage.getItem('playersSaved'));
+  randomTiles = JSON.parse(localStorage.getItem('randomTiles'));
+  currentPlayer = parseInt(localStorage.getItem('currentPlayerIndex'));
+  reloadTiles();
+} else {
+  localStorage.setItem('flipped', JSON.stringify(flipped));
+  console.log(JSON.stringify(flipped));
+  localStorage.setItem('tilesRemain', tilesRemain);
+  localStorage.setItem('playersSaved', JSON.stringify(playersSaved));
+  localStorage.setItem('randomTiles', JSON.stringify(randomTiles));
+  localStorage.setItem('currentPlayerIndex', 0);
+  localStorage.setItem('reloadAvailable', 'true');
+}
+
+
+// construct Player
+new Player(playersSaved[0]);
+var currentPlayer = players[0];
+currentPlayer.update();
+createOrUpdatePlayerInfo();
+// DELETEME test local storage
+// console.log(retrievePlayerInfo());
 
 // FUNCTIONS =====
 
@@ -121,10 +157,6 @@ function matchFound(elementId){
   tile(elementId).active = false;
   // TODO: visual cue of deactivated state ie opacity for now
   clickedTile.setAttribute('style', 'opacity: 0.25');
-}
-
-function displayDirections(){
-  alert("Directions content go here");
 }
 
 // CRUD Functions =====
@@ -204,5 +236,22 @@ function checkGameOver(){
     createOrUpdatePlayerInfo();
     window.location.href = 'results.html';
     console.log('Game Over!');
+  }
+}
+
+function reloadTiles () {
+  for (i = 0; i < randomTiles.length; i++) {
+    var elementId = idIndex[i];
+    var clickedTile = document.getElementById(elementId);
+    if (!tile(elementId).active) {
+      clickedTile.setAttribute('src', tile(elementId).path);
+      clickedTile.setAttribute('style', 'opacity: 0.6');
+    } else if (flipped.includes(elementId)) {
+      clickedTile.setAttribute('src', tile(elementId).path);
+      clickedTile.setAttribute('style', 'opacity: 1.0');
+    } else {
+      clickedTile.setAttribute('src', 'temp/facedown.gif');
+      clickedTile.setAttribute('style', 'opacity: 1.0');
+    }
   }
 }
