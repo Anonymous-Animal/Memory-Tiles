@@ -47,5 +47,5 @@ function setPlayerName(inputName){
 
 function getReloadState(){
   // return localStorage.getItem('reloadAvailable');
-  return true;
+  return false;
 }
