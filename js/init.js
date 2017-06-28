@@ -3,16 +3,20 @@
 // GLOBAL VAR INIT =====
 
 // size of the grid
-var gridSize = 16;
+var gridSize = 30;
 // tiles remaining after clicked
 var tilesRemain = gridSize;
 // the total number of turns for the entire game
 // var startTurns = gridSize * 2;
-var startHP = 100;
+var startHP = 150;
 // array of flipped Tiles
 var flipped = [];
+// array of strings for at the end
 var exposition = [];
 var idIndex = [];
+//changes difficulty
+var hpPerMatch = 10;
+var hpPerFail = 10;
 
 for (var i = 0; i < gridSize; i++) {
   if (i < 9) {
@@ -33,7 +37,8 @@ function Player (name, index){
 }
 
 // per tile
-function Tile(path, match, mismatch, mismatch2){
+function Tile(name, path, match, mismatch, mismatch2){
+  this.name = name;
   this.path = 'chris/' + path;
   this.active = true;
   // allows methods to be used for matches and mismatches
@@ -53,22 +58,36 @@ var currentPlayer = players[(Math.round(Math.random()))];
 
 // init array of tiles
 var sortedTiles = [
-  new Tile('bale_1.jpg', nada, nada, nada),
-  new Tile('bale_1.jpg', nada, nada, nada),
-  new Tile('eccleston_1.jpg', nada, nada, nada),
-  new Tile('eccleston_1.jpg', nada, nada, nada),
-  new Tile('evans_1.jpg', nada, nada, nada),
-  new Tile('evans_1.jpg', nada, nada, nada),
-  new Tile('hemsworth_1.jpg', nada, nada, nada),
-  new Tile('hemsworth_1.jpg', nada, nada, nada),
-  new Tile('pine_1.jpg', nada, nada, nada),
-  new Tile('pine_1.jpg', nada, nada, nada),
-  new Tile('pratt_1.jpg', nada, nada, nada),
-  new Tile('pratt_1.jpg', nada, nada, nada),
-  new Tile('reeves_1.jpg', nada, nada, nada),
-  new Tile('reeves_1.jpg', nada, nada, nada),
-  new Tile('wiig_1.jpg', nada, nada, nada),
-  new Tile('wiig_1.jpg', nada, nada, nada)
+  new Tile('Christian Bale', 'bale_1.jpg', nada, nada, nada),
+  new Tile('Christian Bale', 'bale_1.jpg', nada, nada, nada),
+  new Tile('Chris Colfer', 'colfer_1.jpg', nada, nada, nada),
+  new Tile('Chris Colfer', 'colfer_1.jpg', nada, nada, nada),
+  new Tile('Christopher Eccleston', 'eccleston_1.jpg', nada, nada, nada),
+  new Tile('Christopher Eccleston', 'eccleston_1.jpg', nada, nada, nada),
+  new Tile('Chris Evans', 'evans_1.jpg', nada, nada, nada),
+  new Tile('Chris Evans', 'evans_1.jpg', nada, nada, nada),
+  new Tile('Chris Evans', 'evans_2.jpg', nada, nada, nada),
+  new Tile('Chris Evans', 'evans_2.jpg', nada, nada, nada),
+  new Tile('Chris Hemsworth', 'hemsworth_1.jpg', nada, nada, nada),
+  new Tile('Chris Hemsworth', 'hemsworth_1.jpg', nada, nada, nada),
+  new Tile('Chris Hemsworth', 'hemsworth_2.jpg', nada, nada, nada),
+  new Tile('Chris Hemsworth', 'hemsworth_2.jpg', nada, nada, nada),
+  new Tile('Christopher Lee', 'lee_1.jpg', nada, nada, nada),
+  new Tile('Christopher Lee', 'lee_1.jpg', nada, nada, nada),
+  new Tile('Chris O\'Donnell', 'odonnell.jpg', nada, nada, nada),
+  new Tile('Chris O\'Donnell', 'odonnell.jpg', nada, nada, nada),
+  new Tile('Chris Pine', 'pine_1.jpg', nada, nada, nada),
+  new Tile('Chris Pine', 'pine_1.jpg', nada, nada, nada),
+  new Tile('Chris Pine', 'pine_3.jpg', nada, nada, nada),
+  new Tile('Chris Pine', 'pine_3.jpg', nada, nada, nada),
+  new Tile('Chris Pratt', 'pratt_1.jpg', nada, nada, nada),
+  new Tile('Chris Pratt', 'pratt_1.jpg', nada, nada, nada),
+  new Tile('Chris Pratt', 'pratt_2.jpg', nada, nada, nada),
+  new Tile('Chris Pratt', 'pratt_2.jpg', nada, nada, nada),
+  new Tile('Christopher Reeve', 'reeve_1.jpg', nada, nada, nada),
+  new Tile('Christopher Reeve', 'reeve_1.jpg', nada, nada, nada),
+  new Tile('Christopher Walken', 'walken_1.jpg', nada, nada, nada),
+  new Tile('Christopher Walken', 'walken_1.jpg', nada, nada, nada)
 ];
 
 // shuffle the array of tiles
@@ -96,13 +115,13 @@ function checkMatch(){
     // if match is found
     matchFound(flipped[0]);
     matchFound(flipped[1]);
-    currentPlayer.hp += 10;
+    currentPlayer.hp += hpPerMatch;
     currentPlayer.pairs += 1;
   } else {
     // finally call flipTile on both elements
     flipTile(flipped[1]);
     flipTile(flipped[0]);
-    currentPlayer.hp -= 10;
+    currentPlayer.hp -= hpPerFail;
     currentPlayer = currentPlayer.opponent;
   }
 
@@ -125,7 +144,7 @@ function matchFound(elementId){
   // deactivates tile
   tile(elementId).active = false;
   // TODO: visual cue of deactivated state ie opacity for now
-  clickedTile.setAttribute('style', 'opacity: 0.25');
+  clickedTile.setAttribute('style', 'opacity: 0.6');
 }
 
 // HELPER FUNCTIONS =====
@@ -168,7 +187,7 @@ function refreshTiles () {
     var clickedTile = document.getElementById(elementId);
     if (!tile(elementId).active) {
       clickedTile.setAttribute('src', tile(elementId).path);
-      clickedTile.setAttribute('style', 'opacity: 0.25');
+      clickedTile.setAttribute('style', 'opacity: 0.6');
     } else if (flipped.includes(elementId)) {
       clickedTile.setAttribute('src', tile(elementId).path);
       clickedTile.setAttribute('style', 'opacity: 1.0');
@@ -179,7 +198,7 @@ function refreshTiles () {
   }
 }
 
-
+// displays messages at the end of each round
 function display () {
   console.log('\n');
   for (var i = 0; i < exposition.length; i++) {

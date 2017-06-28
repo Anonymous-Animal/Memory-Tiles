@@ -26,6 +26,8 @@ Same
 
 ## Stretch goals:
 
+* As a customer, Chris wants to make it easier for his fans to tell the difference between him and other people with the same name.
+
 * Since Nancy owns a plethora of devices, she would love the ability to switch between playing on her desktop and phone so that she can enjoy a game everywhere she is.
 
 * Nancy would like to potentially make friends by asking another user to play this game with her.
