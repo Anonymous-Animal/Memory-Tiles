@@ -1,10 +1,13 @@
 'use strict';
 
+// this is a page for function calls within the tiles
+
 function nada () {
   ;
   // this program does what it says
 }
 
+// flips all cards upside-down
 function upsideDown () {
   exposition.push('This cat turned your world upside-down!\n\n');
   for (var i = 0; i < flipped.length; i++) {
