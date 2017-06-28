@@ -12,6 +12,7 @@ var startTurns = gridSize * 2;
 var flipped = [];
 var players = [];
 var idIndex = [];
+var playersSaved = [[getPlayerName(), 0, startTurns, 0]];
 
 for (var i = 0; i < gridSize; i++) {
   if (i < 9) {
@@ -24,22 +25,18 @@ for (var i = 0; i < gridSize; i++) {
 // OBJ CONSTRUCTOR =====
 
 // per player
-function Player (input) {
-  if (typeof(input) == 'string') {
-    this.name = input;
-    this.index = players.length;
-    this.turns = startTurns;
-    this.points = 0;
-  } else {
-    this.name = input[0];
-    this.index = input[1];
-    this.turns = input[2];
-    this.points = input[3];
-  }
+function Player (myArray) {
+  this.name = myArray[0];
+  this.index = myArray[1];
+  this.turns = myArray[2];
+  this.points = myArray[3];
   // add pull name local storage
   this.namefield = 'name_' + this.index;
   this.turnsfield = 'turns_' + this.index;
   this.scorefield = 'score_' + this.index;
+  this.saved = function (){
+    return([this.name, this.index, this.turns, this.points])
+  }
   players.push(this);
 }
 
@@ -49,6 +46,7 @@ Player.prototype.update = function (){
   document.getElementById(this.turnsfield).innerHTML = this.turns;
   document.getElementById(this.scorefield).innerHTML = this.points;
 };
+
 
 // per tile
 function Tile(path){
@@ -90,21 +88,28 @@ if (localStorage.getItem('reloadAvailable')) {
   }
   flipped = JSON.parse(localStorage.getItem('flipped'));
   tilesRemain = localStorage.getItem('tilesRemain');
-  players = JSON.parse(localStorage.getItem('players'));
+  playersSaved = JSON.parse(localStorage.getItem('playersSaved'));
   randomTiles = JSON.parse(localStorage.getItem('randomTiles'));
-  currentPlayer = players[localStorage.getItem('currentPlayerIndex')];
+  currentPlayer = parseInt(localStorage.getItem('currentPlayerIndex'));
   reloadTiles();
 } else {
   localStorage.setItem('flipped', JSON.stringify(flipped));
   console.log(JSON.stringify(flipped));
   localStorage.setItem('tilesRemain', tilesRemain);
-  localStorage.setItem('players', JSON.stringify(players));
+  localStorage.setItem('playersSaved', JSON.stringify(playersSaved));
   localStorage.setItem('randomTiles', JSON.stringify(randomTiles));
-  localStorage.setItem('currentPlayerIndex', currentPlayer.index);
+  localStorage.setItem('currentPlayerIndex', 0);
   localStorage.setItem('reloadAvailable', 'true');
 }
 
 
+// construct Player
+new Player(playersSaved[0]);
+var currentPlayer = players[0];
+currentPlayer.update();
+createOrUpdatePlayerInfo();
+// DELETEME test local storage
+// console.log(retrievePlayerInfo());
 
 // FUNCTIONS =====
 
