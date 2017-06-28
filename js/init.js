@@ -110,6 +110,8 @@ function createOrUpdatePlayerInfo () {
 
 function retrievePlayerInfo () {
   var stringifiedPlayerInfo = localStorage.getItem('player');
+  var parsedPlayerInfo = JSON.parse(stringifiedPlayerInfo);
+  return parsedPlayerInfo;
 }
 
 function deletePlayerInfo () {
