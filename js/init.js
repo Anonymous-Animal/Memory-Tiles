@@ -101,6 +101,21 @@ function matchFound(elementId){
   clickedTile.setAttribute('style', 'opacity: 0.25');
 }
 
+// CRUD Functions =====
+
+function createOrUpdatePlayerInfo () {
+  var stringifiedPlayerInfo = JSON.stringify(currentPlayer);
+  localStorage.setItem('player', stringifiedPlayerInfo);
+}
+
+function retrievePlayerInfo () {
+  var stringifiedPlayerInfo = localStorage.getItem('player');
+}
+
+function deletePlayerInfo () {
+  localStorage.clear();
+}
+
 // HELPER FUNCTIONS =====
 
 // modeled after Fisher-Yates Shuffle in https://bost.ocks.org/mike/shuffle/
