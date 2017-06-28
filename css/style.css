@@ -1,3 +1,5 @@
+/*************Index Page Styling****************/
+
 body {
   background-color: rgb(64, 158, 125)
 }
@@ -87,6 +89,9 @@ aside, nav {
 .label{
   font-weight:bold;
 }
+
+/***********12-Column Grid Rules***********/
+
 .row::before,
 .row::after {
   content: "";
