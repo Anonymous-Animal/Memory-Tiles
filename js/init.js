@@ -10,25 +10,36 @@ var tilesRemain = gridSize;
 var startTurns = gridSize * 2;
 // array of flipped Tiles
 var flipped = [];
+var exposition = [];
 
 
 // OBJ CONSTRUCTOR =====
 
 // per player
-function Player (name){
+function Player (name, index){
   this.name = name;
-  this.turns = startTurns;
-  this.points = 0;
+  this.index = index;
+  this.opponent = Math.abs(index - 1);
+  this.hp = 100;
+  this.score = 0;
 }
 
 // per tile
-function Tile(path){
+function Tile(path, match, mismatch, mismatch2){
   this.path = 'temp/' + path;
   this.active = true;
+  // allows methods to be used for matches and mismatches
+  this.match = match;
+  this.mismatch = function() {
+    mismatch();
+    // after the first mismatch happens, the method for mismatch might change
+    this.action = mismatch2;
+  };
 }
 
 // construct Player
-var currentPlayer = new Player('Test Player');
+var players = [new Player('Player 1', 0), new Player('Player 2', 1)];
+var currentPlayer = players[(Math.round(Math.random()))];
 
 // init array of tiles
 var sortedTiles = [
@@ -58,10 +69,10 @@ var randomTiles = shuffle(sortedTiles.slice(0));
 // returns tile object
 function tile(elementId){
   // error handling
-  if(elementId.length < 4){
+  if(!elementId || elementId.length < 4 || elementId.substring(0, 4) != 'tile'){
     return null;
   } else {
-    console.log(randomTiles[parseInt(elementId.slice(4) - 1)]);
+    // console.log(randomTiles[parseInt(elementId.slice(4) - 1)]);
     return randomTiles[parseInt(elementId.slice(4) - 1)];
   }
 }
@@ -79,12 +90,14 @@ function checkMatch(){
     // finally call flipTile on both elements
     flipTile(flipped[1]);
     flipTile(flipped[0]);
+    currentPlayer = players[currentPlayer.opponent];
   }
 
   // clear array of flipped elements
   clearFlippedArray();
   // remove turn from current Player
   removeTurn();
+  display();
   // check if game is over
   checkGameOver();
 }
@@ -113,19 +126,14 @@ function shuffle(array) {
 
     t = array[m];
     array[m] = array[i];
-    array[i] = t;
-  }
-
-  return array;
-}
+    array[i] = t;}
+  return array;}
 
 function clearFlippedArray(){
-  flipped = [];
-}
+  flipped = [];}
 
 function removeTurn(){
-  currentPlayer.turns--;
-}
+  currentPlayer.turns--;}
 
 function addPoints(){
   currentPlayer.points++;
@@ -136,4 +144,11 @@ function checkGameOver(){
     // TODO: trigger game over page
     console.log('Game Over!');
   }
+}
+
+function display () {
+  for (var i = 0; i < exposition.length; i++) {
+    console.log(exposition[i]);
+  }
+  console.log('It is now ' + currentPlayer.name + '\'s turn');
 }

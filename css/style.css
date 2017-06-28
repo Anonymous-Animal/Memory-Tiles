@@ -23,7 +23,9 @@
   text-align: center;
 }
 
-
+.tile {
+  width: 20%
+}
 
 main {
   border: 5px solid black;
