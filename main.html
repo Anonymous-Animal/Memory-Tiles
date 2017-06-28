@@ -20,13 +20,12 @@
           <p class="mainlabel">Score</p>
           <p id="score_0">OOO</p>
         <div class="">
-
         </div>
       </aside>
       <nav>
-        <a href="#">Directions</a><br>
-        <a href="#">Home</a><br>
-        <button>Start over</button>
+        <button type="button" id="directions" onclick="displayDirections()">Directions</button>
+        <button type="button" id="start" onClick="location.href='main.html';">Reset Tiles</button>
+        <button type="button" id="home" onClick="location.href='index.html';">New Game</button>
       </nav>
     </div>
     <main id="tileGrid" class="column col-9">

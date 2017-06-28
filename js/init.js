@@ -123,6 +123,10 @@ function matchFound(elementId){
   clickedTile.setAttribute('style', 'opacity: 0.25');
 }
 
+function displayDirections(){
+  alert("Directions content go here");
+}
+
 // CRUD Functions =====
 
 // gets player name from local storage
