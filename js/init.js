@@ -97,6 +97,7 @@ function checkMatch(){
     matchFound(flipped[0]);
     matchFound(flipped[1]);
     currentPlayer.hp += 10;
+    currentPlayer.pairs += 1;
   } else {
     // finally call flipTile on both elements
     flipTile(flipped[1]);
@@ -162,9 +163,9 @@ function checkGameOver(){
 
 // in case we ever need to reload tiles, such as when re-loading from saved states
 function refreshTiles () {
-  for (var i = 0; i < gridSize; i++) {
+  for (i = 0; i < gridSize; i++) {
     var elementId = idIndex[i];
-    clickedTile = document.getElementById(elementId);
+    var clickedTile = document.getElementById(elementId);
     if (!tile(elementId).active) {
       clickedTile.setAttribute('src', tile(elementId).path);
       clickedTile.setAttribute('style', 'opacity: 0.25');
