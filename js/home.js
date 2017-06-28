@@ -26,6 +26,6 @@ function readInput() {
 
 // adds player name to local storage
 function setPlayerName(inputName){
-  localStorage.setItem('name', inputName);
+  sessionStorage.setItem('name', inputName);
   console.log(inputName);
 }

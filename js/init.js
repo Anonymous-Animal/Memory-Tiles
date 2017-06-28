@@ -45,6 +45,9 @@ function Tile(path){
 new Player(getPlayerName());
 var currentPlayer = players[0];
 currentPlayer.update();
+createOrUpdatePlayerInfo();
+// DELETEME test local storage
+console.log(retrievePlayerInfo());
 
 //DELETEME
 console.log(currentPlayer);
@@ -124,7 +127,7 @@ function matchFound(elementId){
 
 // gets player name from local storage
 function getPlayerName(){
-  return localStorage.getItem('name');
+  return sessionStorage.getItem('name');
 }
 
 function createOrUpdatePlayerInfo() {
