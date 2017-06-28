@@ -10,15 +10,24 @@ var tilesRemain = gridSize;
 var startTurns = gridSize * 2;
 // array of flipped Tiles
 var flipped = [];
-
+var players = [];
 
 // OBJ CONSTRUCTOR =====
 
 // per player
-function Player (name){
+function Player (name) {
+  this.index = players.length;
+  // add pull name local storage
   this.name = name;
+  this.namefield = 'name_' + this.index;
+  this.turnsfield = 'turns_' + this.index;
+  this.scorefield = 'score_' + this.index;
   this.turns = startTurns;
   this.points = 0;
+  document.getElementById(this.namefield).innerHTML = this.name;
+  document.getElementById(this.turnsfield).innerHTML = this.turns;
+  document.getElementById(this.scorefield).innerHTML = this.points;
+  players.push(this);
 }
 
 // per tile
@@ -28,7 +37,8 @@ function Tile(path){
 }
 
 // construct Player
-var currentPlayer = new Player('Test Player');
+new Player('Test Player');
+var currentPlayer = players[0];
 
 // init array of tiles
 var sortedTiles = [
@@ -151,6 +161,7 @@ function addPoints(){
 function checkGameOver(){
   if(currentPlayer.turns == 0 || tilesRemain == 0){
     // TODO: trigger game over page
+    window.location.replace('results.html');
     console.log('Game Over!');
   }
 }
