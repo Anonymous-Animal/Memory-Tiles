@@ -19,6 +19,7 @@ var hpPerMatch = 10;
 var hpPerFail = 10;
 // bonus for matching card on first appearence
 var firstTimeBonus = 10;
+var needRefresh = false;
 
 for (var i = 0; i < gridSize; i++) {
   if (i < 9) {
@@ -136,6 +137,10 @@ function checkMatch(){
     flipTile(flipped[0]);
     currentPlayer.hp -= hpPerFail;
     currentPlayer = currentPlayer.opponent;
+  }
+  if (needRefresh) {
+    refreshTiles();
+    needRefresh = false;
   }
 
   // clear array of flipped elements

@@ -41,5 +41,5 @@ function upsideDown (name) {
     randomTiles[m] = randomTiles[i];
     randomTiles[i] = t;
   };
-  refreshTiles ();
+  needRefresh = true;
 }
