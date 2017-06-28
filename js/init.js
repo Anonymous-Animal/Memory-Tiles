@@ -19,9 +19,8 @@ var exposition = [];
 function Player (name, index){
   this.name = name;
   this.index = index;
-  this.opponent = Math.abs(index - 1);
   this.hp = 100;
-  this.score = 0;
+  this.pairs = 0;
 }
 
 // per tile
@@ -39,26 +38,28 @@ function Tile(path, match, mismatch, mismatch2){
 
 // construct Player
 var players = [new Player('Player 1', 0), new Player('Player 2', 1)];
+players[0].opponent = players[1];
+players[1].opponent = players[0];
 var currentPlayer = players[(Math.round(Math.random()))];
 
 // init array of tiles
 var sortedTiles = [
-  new Tile('kitten_01.jpg'),
-  new Tile('kitten_02.jpg'),
-  new Tile('kitten_03.jpg'),
-  new Tile('kitten_04.jpg'),
-  new Tile('kitten_05.jpg'),
-  new Tile('kitten_06.jpg'),
-  new Tile('kitten_07.jpg'),
-  new Tile('kitten_08.jpg'),
-  new Tile('kitten_01.jpg'),
-  new Tile('kitten_02.jpg'),
-  new Tile('kitten_03.jpg'),
-  new Tile('kitten_04.jpg'),
-  new Tile('kitten_05.jpg'),
-  new Tile('kitten_06.jpg'),
-  new Tile('kitten_07.jpg'),
-  new Tile('kitten_08.jpg')
+  new Tile('kitten_01.jpg', nada, nada, nada),
+  new Tile('kitten_02.jpg', nada, nada, nada),
+  new Tile('kitten_03.jpg', nada, nada, nada),
+  new Tile('kitten_04.jpg', nada, nada, nada),
+  new Tile('kitten_05.jpg', nada, nada, nada),
+  new Tile('kitten_06.jpg', nada, nada, nada),
+  new Tile('kitten_07.jpg', nada, nada, nada),
+  new Tile('kitten_08.jpg', nada, nada, nada),
+  new Tile('kitten_01.jpg', nada, nada, nada),
+  new Tile('kitten_02.jpg', nada, nada, nada),
+  new Tile('kitten_03.jpg', nada, nada, nada),
+  new Tile('kitten_04.jpg', nada, nada, nada),
+  new Tile('kitten_05.jpg', nada, nada, nada),
+  new Tile('kitten_06.jpg', nada, nada, nada),
+  new Tile('kitten_07.jpg', nada, nada, nada),
+  new Tile('kitten_08.jpg', nada, nada, nada)
 ];
 
 // shuffle the array of tiles
@@ -82,21 +83,24 @@ function checkMatch(){
   // checks flipped array to see if tiles are matching
   if(tile(flipped[0]).path == tile(flipped[1]).path){
     // iterate points to current player
-    addPoints();
+    // addPoints();
     // if match is found
     matchFound(flipped[0]);
     matchFound(flipped[1]);
+    currentPlayer.hp += 10;
   } else {
     // finally call flipTile on both elements
     flipTile(flipped[1]);
     flipTile(flipped[0]);
-    currentPlayer = players[currentPlayer.opponent];
+    currentPlayer.hp -= 10;
+    currentPlayer = currentPlayer.opponent;
   }
 
   // clear array of flipped elements
-  clearFlippedArray();
+  flipped = [];
+  // clearFlippedArray();
   // remove turn from current Player
-  removeTurn();
+  // removeTurn();
   display();
   // check if game is over
   checkGameOver();
@@ -129,26 +133,29 @@ function shuffle(array) {
     array[i] = t;}
   return array;}
 
-function clearFlippedArray(){
-  flipped = [];}
-
-function removeTurn(){
-  currentPlayer.turns--;}
-
-function addPoints(){
-  currentPlayer.points++;
-}
+// function clearFlippedArray(){
+//   flipped = [];}
+//
+// function removeTurn(){
+//   currentPlayer.turns--;}
+//
+// function addPoints(){
+//   currentPlayer.points++;
+// }
 
 function checkGameOver(){
-  if(currentPlayer.turns == 0 || tilesRemain == 0){
+  if(players[0].hp == 0 || players[1].hp == 0 || tilesRemain == 0){
     // TODO: trigger game over page
     console.log('Game Over!');
   }
 }
 
 function display () {
+  console.log('\n');
   for (var i = 0; i < exposition.length; i++) {
     console.log(exposition[i]);
   }
+  exposition = [];
+  console.log(players[0].hp + ' HP and ' + players[0].pairs + ' pairs for ' + players[0].name + ', vs. ' + players[1].hp + ' HP and ' + players[1].pairs + ' pairs for ' + players[1].name + '\n\n');
   console.log('It is now ' + currentPlayer.name + '\'s turn');
 }

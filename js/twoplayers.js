@@ -1,5 +1,6 @@
 'use strict';
 
-function nothing() {
+function nada () {
+  ;
   // this program does what it says
 }
