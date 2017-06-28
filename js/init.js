@@ -12,29 +12,6 @@ var startTurns = gridSize * 2;
 var flipped = [];
 var players = [];
 
-// INDEX.HTML EVENT LISTENER
-var inputButton = document.getElementById('inputButton');
-// var startButton = document.getElementById('startButton');
-var inputName;
-
-eventListener();
-// event listener function
-function eventListener() {
-  inputButton.addEventListener('click', readInput);
-}
-
-function readInput() {
-  var inputArea = document.getElementById('inputArea');
-  inputArea.style.display = 'none';
-
-  var outputArea = document.getElementById('outputArea');
-  outputArea.style.display = 'block';
-  inputName = document.getElementById('inputName').value;
-  document.getElementById('userName').innerHTML = inputName;
-
-  setPlayerName(inputName);
-}
-
 
 // OBJ CONSTRUCTOR =====
 
@@ -51,6 +28,7 @@ function Player (name) {
   players.push(this);
 }
 
+// updates screen data
 Player.prototype.update = function (){
   document.getElementById(this.namefield).innerHTML = this.name;
   document.getElementById(this.turnsfield).innerHTML = this.turns;
@@ -66,6 +44,8 @@ function Tile(path){
 // construct Player
 new Player(getPlayerName());
 var currentPlayer = players[0];
+currentPlayer.update();
+
 //DELETEME
 console.log(currentPlayer);
 
@@ -142,11 +122,7 @@ function matchFound(elementId){
 
 // CRUD Functions =====
 
-function setPlayerName(inputName){
-  localStorage.setItem('name', inputName);
-  console.log(inputName);
-}
-
+// gets player name from local storage
 function getPlayerName(){
   return localStorage.getItem('name');
 }
