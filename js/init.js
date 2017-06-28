@@ -34,7 +34,7 @@ function Player (name, index){
 
 // per tile
 function Tile(path, match, mismatch, mismatch2){
-  this.path = 'temp/' + path;
+  this.path = 'chris/' + path;
   this.active = true;
   // allows methods to be used for matches and mismatches
   this.match = match;
@@ -53,22 +53,22 @@ var currentPlayer = players[(Math.round(Math.random()))];
 
 // init array of tiles
 var sortedTiles = [
-  new Tile('kitten_01.jpg', nada, nada, nada),
-  new Tile('kitten_02.jpg', nada, nada, nada),
-  new Tile('kitten_03.jpg', nada, nada, nada),
-  new Tile('kitten_04.jpg', nada, nada, nada),
-  new Tile('kitten_05.jpg', nada, nada, nada),
-  new Tile('kitten_06.jpg', nada, nada, nada),
-  new Tile('kitten_07.jpg', nada, nada, nada),
-  new Tile('kitten_08.jpg', nada, nada, nada),
-  new Tile('kitten_01.jpg', nada, nada, nada),
-  new Tile('kitten_02.jpg', nada, nada, nada),
-  new Tile('kitten_03.jpg', nada, nada, nada),
-  new Tile('kitten_04.jpg', nada, nada, nada),
-  new Tile('kitten_05.jpg', nada, nada, nada),
-  new Tile('kitten_06.jpg', nada, nada, nada),
-  new Tile('kitten_07.jpg', nada, nada, nada),
-  new Tile('kitten_08.jpg', nada, nada, nada)
+  new Tile('bale_1.jpg', nada, nada, nada),
+  new Tile('bale_1.jpg', nada, nada, nada),
+  new Tile('eccleston_1.jpg', nada, nada, nada),
+  new Tile('eccleston_1.jpg', nada, nada, nada),
+  new Tile('evans_1.jpg', nada, nada, nada),
+  new Tile('evans_1.jpg', nada, nada, nada),
+  new Tile('hemsworth_1.jpg', nada, nada, nada),
+  new Tile('hemsworth_1.jpg', nada, nada, nada),
+  new Tile('pine_1.jpg', nada, nada, nada),
+  new Tile('pine_1.jpg', nada, nada, nada),
+  new Tile('pratt_1.jpg', nada, nada, nada),
+  new Tile('pratt_1.jpg', nada, nada, nada),
+  new Tile('reeves_1.jpg', nada, nada, nada),
+  new Tile('reeves_1.jpg', nada, nada, nada),
+  new Tile('wiig_1.jpg', nada, nada, nada),
+  new Tile('wiig_1.jpg', nada, nada, nada)
 ];
 
 // shuffle the array of tiles
