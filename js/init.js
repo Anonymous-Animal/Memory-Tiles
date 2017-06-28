@@ -17,6 +17,8 @@ var idIndex = [];
 //changes difficulty
 var hpPerMatch = 10;
 var hpPerFail = 10;
+// bonus for matching card on first appearence
+var firstTimeBonus = 10;
 
 for (var i = 0; i < gridSize; i++) {
   if (i < 9) {
@@ -41,6 +43,7 @@ function Tile(name, path, match, mismatch, mismatch2){
   this.name = name;
   this.path = 'chris/' + path;
   this.active = true;
+  this.bonus = firstTimeBonus;
   // allows methods to be used for matches and mismatches
   this.match = match;
   this.mismatch = function() {
@@ -117,8 +120,15 @@ function checkMatch(){
     matchFound(flipped[1]);
     currentPlayer.hp += hpPerMatch;
     currentPlayer.pairs += 1;
+    if (tile(flipped[0]).bonus || tile(flipped[1]).bonus) {
+      firstTimeBonus = tile(flipped[0]).bonus + tile(flipped[1]).bonus;
+      exposition.push('Blind luck bonus! ' + firstTimeBonus + ' points!\n\n');
+      currentPlayer.hp += firstTimeBonus;
+    }
   } else {
     // finally call flipTile on both elements
+    tile(flipped[0]).bonus = 0;
+    tile(flipped[1]).bonus = 0;
     flipTile(flipped[1]);
     flipTile(flipped[0]);
     currentPlayer.hp -= hpPerFail;
