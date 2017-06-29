@@ -1,24 +1,23 @@
 'use strict';
 
-
-
 // INDEX.HTML EVENT LISTENER
 var inputButton = document.getElementById('inputButton');
+var continueButton = document.createElement('button');
+var area = document.getElementById('area');
+var buttonDiv = document.createElement('div');
 
-if(getReloadState()){
-  var area = document.getElementById('area');
-  var buttonDiv = document.createElement('div');
-  var inputArea = document.getElementById('inputArea');
-  inputArea.style.display = 'none';
-  var button = document.createElement('button');
-  button.innerHTML = 'Continue Game';
-  button.setAttribute('id', 'continue');
-  button.setAttribute('onclick', 'location.href=\'main.html\';');
-  area.appendChild(buttonDiv);
-  buttonDiv.appendChild(button);
-}
 
+renderContinueButton();
 eventListener();
+
+function renderContinueButton(){
+  continueButton.innerHTML = 'Continue Game';
+  continueButton.setAttribute('id', 'continue');
+  continueButton.setAttribute('onclick', 'location.href=\'main.html\';');
+
+  area.appendChild(buttonDiv);
+  buttonDiv.appendChild(continueButton);
+}
 
 // event listener function
 function eventListener() {
@@ -29,7 +28,6 @@ function eventListener() {
 function readInput() {
   var inputArea = document.getElementById('inputArea');
   inputArea.style.display = 'none';
-
   var outputArea = document.getElementById('outputArea');
   outputArea.style.display = 'block';
   var inputName = document.getElementById('inputName').value;
@@ -42,10 +40,9 @@ function readInput() {
 function setPlayerName(inputName){
   sessionStorage.setItem('name', inputName);
   // DELETEME
-  console.log(inputName);
+  // console.log(inputName);
 }
 
-function getReloadState(){
-  // return localStorage.getItem('reloadAvailable');
-  return false;
-}
+// function getReloadState(){
+//   return localStorage.getItem('reloadAvailable');
+// }

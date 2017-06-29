@@ -4,6 +4,10 @@ body {
   background-color: rgb(64, 158, 125)
 }
 
+#directions {
+  list-style-type: none;
+}
+
 #mainsection {
 
   display: block;
@@ -72,8 +76,6 @@ body {
   display: block;
   margin: 60px auto;
 }
-
-#
 
 main {
   border: 5px solid black;
