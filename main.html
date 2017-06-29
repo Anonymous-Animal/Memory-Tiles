@@ -7,6 +7,9 @@
     <link href="https://fonts.googleapis.com/css?family=Acme|Lobster|Quicksand" rel="stylesheet">
   </head>
   <body>
+    <div class="splash" id="splash" onclick="splashFunction()">
+
+    </div>
     <div id="sidebar" class="column col-3">
       <aside>
         <h1 class="mainlabel">Memory Tiles</h1>
@@ -22,35 +25,35 @@
           <p id="score_0">OOO</p>
       </aside>
       <nav>
-        <button type="button" id="directions" onclick="displayDirections()">Directions</button>
-        <button type="button" id="start" onClick="location.href='main.html';">Reset Tiles</button>
-        <button type="button" id="home" onClick="location.href='index.html';">New Game</button>
+        <button type="button" id="directions" onclick="splashFunction();">Directions</button>
+        <button type="button" id="start" onClick="location.href='main.html'; localStorage.removeItem('reloadAvailable');">Reset</button>
+        <button type="button" id="home" onClick="location.href='index.html'; localStorage.removeItem('reloadAvailable');">Back</button>
       </nav>
     </div>
     <main id="tileGrid" class="column col-9">
       <div class="row">
-        <img id="tile01" src="temp/facedown.gif" alt="">
-        <img id="tile02" src="temp/facedown.gif" alt="">
-        <img id="tile03" src="temp/facedown.gif" alt="">
-        <img id="tile04" src="temp/facedown.gif" alt="">
+        <img class="tile" id="tile01" src="temp/facedown.gif" alt="">
+        <img class="tile" id="tile02" src="temp/facedown.gif" alt="">
+        <img class="tile" id="tile03" src="temp/facedown.gif" alt="">
+        <img class="tile" id="tile04" src="temp/facedown.gif" alt="">
       </div>
       <div class="row">
-        <img id="tile05" src="temp/facedown.gif" alt="">
-        <img id="tile06" src="temp/facedown.gif" alt="">
-        <img id="tile07" src="temp/facedown.gif" alt="">
-        <img id="tile08" src="temp/facedown.gif" alt="">
+        <img class="tile" id="tile05" src="temp/facedown.gif" alt="">
+        <img class="tile" id="tile06" src="temp/facedown.gif" alt="">
+        <img class="tile" id="tile07" src="temp/facedown.gif" alt="">
+        <img class="tile" id="tile08" src="temp/facedown.gif" alt="">
       </div>
       <div class="row">
-        <img id="tile09" src="temp/facedown.gif" alt="">
-        <img id="tile10" src="temp/facedown.gif" alt="">
-        <img id="tile11" src="temp/facedown.gif" alt="">
-        <img id="tile12" src="temp/facedown.gif" alt="">
+        <img class="tile" id="tile09" src="temp/facedown.gif" alt="">
+        <img class="tile" id="tile10" src="temp/facedown.gif" alt="">
+        <img class="tile" id="tile11" src="temp/facedown.gif" alt="">
+        <img class="tile" id="tile12" src="temp/facedown.gif" alt="">
       </div>
       <div class="row">
-        <img id="tile13" src="temp/facedown.gif" alt="">
-        <img id="tile14" src="temp/facedown.gif" alt="">
-        <img id="tile15" src="temp/facedown.gif" alt="">
-        <img id="tile16" src="temp/facedown.gif" alt="">
+        <img class="tile" id="tile13" src="temp/facedown.gif" alt="">
+        <img class="tile" id="tile14" src="temp/facedown.gif" alt="">
+        <img class="tile" id="tile15" src="temp/facedown.gif" alt="">
+        <img class="tile" id="tile16" src="temp/facedown.gif" alt="">
       </div>
     </main>
     <script src="js/init.js"></script>

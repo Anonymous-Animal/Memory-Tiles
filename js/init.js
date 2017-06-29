@@ -7,7 +7,7 @@ var gridSize = 16;
 // tiles remaining after clicked
 var tilesRemain = gridSize;
 // the total number of turns for the entire game
-var startTurns = gridSize * 2;
+var startTurns = gridSize / 2;
 // array of flipped Tiles
 var flipped = [];
 var players = [];
@@ -170,6 +170,7 @@ function matchFound(elementId){
   var clickedTile = document.getElementById(elementId);
   // subtract from remaining tiles
   tilesRemain --;
+  currentPlayer.turns++;
   // deactivates tile
   tile(elementId).active = false;
   // TODO: visual cue of deactivated state ie opacity for now
@@ -276,4 +277,28 @@ function reloadTiles () {
 
 function nada (name) {
   // this app is just a placeholder
+}
+
+var directionsText = ['How to Play', 'Click two tiles at a time.  You gain a turn if they match, and lose a turn if you don\'t.  Try to match them all before you run out of time!'];
+
+splashFunction(directionsText);
+
+function splashFunction(textArray) {
+  console.log(textArray);
+  var splash = document.getElementById('splash');
+  var splashText = '';
+  if (textArray) {
+    splash.innerHTML = '';
+    console.log(splash.innerHTML);
+    for (var i = 0; i < textArray.lenth; i++) {
+      splash.innerHTML = splash.innerHTML + textArray[i];
+      console.log(splashText);
+    }
+    splash.innerHTML = splashText;
+  }
+  if (splash.style.display === 'none') {
+    splash.style.display = 'block';
+  } else {
+    splash.style.display = 'none';
+  }
 }

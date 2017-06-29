@@ -11,7 +11,7 @@ renderContinueButton();
 eventListener();
 
 function renderContinueButton(){
-  continueButton.innerHTML = 'Continue Game';
+  continueButton.innerHTML = 'Or... Continue Previous Game';
   continueButton.setAttribute('id', 'continue');
   continueButton.setAttribute('onclick', 'location.href=\'main.html\';');
 
