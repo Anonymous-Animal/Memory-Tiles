@@ -116,6 +116,7 @@ button {
 
 #outputArea > ul {
   padding: 0px;
+  text-align: center;
 }
 
 #userName {
@@ -280,8 +281,6 @@ img {
 }
 
 .column > img {
-  /*border: 2px white;*/
-  /*box-shadow: 3px 3px 3px #000;*/
   margin-bottom: 2px;
 }
 
