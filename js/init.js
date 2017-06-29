@@ -322,23 +322,6 @@ function generateKittenTiles () {
     new Tile('name', 'kitten_12.jpg', nada, nada)]);
 }
 
-//
-// function generateChrisTiles () {
-//   return(
-//   [new Tile('Christian Bale', 'bale_1.jpg', nada, nada),
-//     new Tile('Christian Bale', 'bale_1.jpg', nada, nada),
-//     new Tile('Christopher Eccleston', 'eccleston_1.jpg', nada, nada),
-//     new Tile('Christopher Eccleston', 'eccleston_1.jpg', nada, nada),
-//     new Tile('Chris Evans', 'evans_1.jpg', nada, nada),
-//     new Tile('Chris Evans', 'evans_1.jpg', nada, nada),
-//     new Tile('Chris Evans', 'evans_2.jpg', nada, nada),
-//     new Tile('Chris Evans', 'evans_2.jpg', nada, nada),
-//     new Tile('Chris Hemsworth', 'hemsworth_1.jpg', nada, nada),
-//     new Tile('Chris Hemsworth', 'hemsworth_1.jpg', nada, nada),
-//     new Tile('Chris Hemsworth', 'hemsworth_2.jpg', nada, nada),
-//     new Tile('Chris Hemsworth', 'hemsworth_2.jpg', nada, nada),
-// }
-
 
 function generateChrisTiles () {
   return(
