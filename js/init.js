@@ -37,7 +37,6 @@ function Player (playerArray) {
   this.index = playerArray[1];
   this.turns = playerArray[2];
   this.points = playerArray[3];
-  // add pull name local storage
   this.namefield = 'name_0';
   this.turnsfield = 'turns_0';
   this.scorefield = 'score_0';
@@ -98,20 +97,19 @@ if (localStorage.getItem('reloadAvailable')) {
 new Player(playersSaved[0]);
 var currentPlayer = players[0];
 currentPlayer.update();
-currentPlayer.opponent = currentPlayer;
 // [getPlayerName(), 0, startTurns, 0]
-if (playersSaved.length == 2) {
-  new Player(playersSaved[1]);
-  currentPlayer = players[Math.round()];
-  players[0].opponent = players[1];
-  players[1].opponent = players[0];
-  players[0].namefield = 'name_1';
-  players[0].turnsfield = 'turns_1';
-  players[0].scorefield = 'score_1';
-  players[1].namefield = 'name_2';
-  players[1].turnsfield = 'turns_2';
-  players[1].scorefield = 'score_2';
-}
+// if (playersSaved.length == 2) {
+//   new Player(playersSaved[1]);
+//   currentPlayer = players[Math.round()];
+//   players[0].opponent = players[1];
+//   players[1].opponent = players[0];
+//   players[0].namefield = 'name_1';
+//   players[0].turnsfield = 'turns_1';
+//   players[0].scorefield = 'score_1';
+//   players[1].namefield = 'name_2';
+//   players[1].turnsfield = 'turns_2';
+//   players[1].scorefield = 'score_2';
+// }
 
 // FUNCTIONS =====
 
@@ -146,7 +144,9 @@ function checkMatch(){
   clearFlippedArray();
   // remove turn from current Player
   removeTurn();
-  currentPlayer = currentPlayer.opponent;
+  if (players.length == 2) {
+    currentPlayer = players[Math.abs(currentPlayer.index - 1)];
+  }
   // check if game is over
   checkGameOver();
 }
@@ -274,7 +274,9 @@ function chooseTheme(theme) {
     // var defaultTileBack = 'temp/facedown.gif'; back of tile
     // var pictureFolder = 'temp/'; folder for your images
     // var opacitySetting = 0.4; opacity setting after match
-    // sortedTiles = generateKittenTiles();
+    // sortedTiles = generateKittenTiles(); constructor
+  } else if (true) {
+    sortedTiles = generateKittenSameTiles()
   } else {
     sortedTiles = generateKittenTiles();
   }
@@ -307,4 +309,33 @@ function generateKittenTiles () {
     new Tile('name', 'kitten_10.jpg', nada, nada),
     new Tile('name', 'kitten_11.jpg', nada, nada),
     new Tile('name', 'kitten_12.jpg', nada, nada)]);
+}
+
+
+function generateKittenSameTiles () {
+  return(
+  [new Tile('name', 'kitten_01.jpg', nada, nada),
+    new Tile('name', 'kitten_01.jpg', nada, nada),
+    new Tile('name', 'kitten_01.jpg', nada, nada),
+    new Tile('name', 'kitten_01.jpg', nada, nada),
+    new Tile('name', 'kitten_01.jpg', nada, nada),
+    new Tile('name', 'kitten_01.jpg', nada, nada),
+    new Tile('name', 'kitten_01.jpg', nada, nada),
+    new Tile('name', 'kitten_01.jpg', nada, nada),
+    new Tile('name', 'kitten_01.jpg', nada, nada),
+    new Tile('name', 'kitten_01.jpg', nada, nada),
+    new Tile('name', 'kitten_01.jpg', nada, nada),
+    new Tile('name', 'kitten_01.jpg', nada, nada),
+    new Tile('name', 'kitten_01.jpg', nada, nada),
+    new Tile('name', 'kitten_01.jpg', nada, nada),
+    new Tile('name', 'kitten_01.jpg', nada, nada),
+    new Tile('name', 'kitten_01.jpg', nada, nada),
+    new Tile('name', 'kitten_01.jpg', nada, nada),
+    new Tile('name', 'kitten_01.jpg', nada, nada),
+    new Tile('name', 'kitten_01.jpg', nada, nada),
+    new Tile('name', 'kitten_01.jpg', nada, nada),
+    new Tile('name', 'kitten_01.jpg', nada, nada),
+    new Tile('name', 'kitten_01.jpg', nada, nada),
+    new Tile('name', 'kitten_01.jpg', nada, nada),
+    new Tile('name', 'kitten_01.jpg', nada, nada)]);
 }
