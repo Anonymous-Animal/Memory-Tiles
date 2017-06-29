@@ -113,7 +113,7 @@ button {
   display: inline-block;
 }
 
-#continue {
+#continue, #reset {
   display: block;
   margin: 60px auto;
 }
