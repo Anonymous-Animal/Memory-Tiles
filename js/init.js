@@ -54,7 +54,6 @@ Player.prototype.update = function (){
 function Tile(path){
   this.path = 'temp/' + path;
   this.active = true;
-  this.action = test2;
 }
 
 // init array of tiles
@@ -259,6 +258,3 @@ function reloadTiles () {
     }
   }
 }
-function test2() {
-  console.log(262, 'pass!')
-};
