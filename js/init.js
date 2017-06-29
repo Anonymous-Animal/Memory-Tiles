@@ -7,13 +7,18 @@ var gridSize = 24;
 // tiles remaining after clicked
 var tilesRemain = gridSize;
 // the total number of turns for the entire game
-var startTurns = Math.floor(gridSize * .5);
+var startTurns = 12;
 // array of flipped Tiles
+var correctBonus = 3;
 var flipped = [];
 var players = [];
 var idIndex = [];
 var playersSaved = [[getPlayerName(), 0, startTurns, 0]];
 var defaultTileBack = 'temp/facedown.gif';
+var pictureFolder = 'temp/';
+var sortedTiles; var randomTiles;
+var matchSystem = 'path';
+var opacitySetting = 0.4;
 
 // accounts for naming convention of tiles
 for (var i = 0; i < gridSize; i++) {
@@ -33,9 +38,9 @@ function Player (playerArray) {
   this.turns = playerArray[2];
   this.points = playerArray[3];
   // add pull name local storage
-  this.namefield = 'name_' + this.index;
-  this.turnsfield = 'turns_' + this.index;
-  this.scorefield = 'score_' + this.index;
+  this.namefield = 'name_0';
+  this.turnsfield = 'turns_0';
+  this.scorefield = 'score_0';
   this.saved = function (){
     return([this.name, this.index, this.turns, this.points]);
   };
@@ -51,41 +56,18 @@ Player.prototype.update = function (){
 
 
 // per tile as object
-function Tile(path){
-  this.path = 'temp/' + path;
+function Tile (name, path, match, nomatch) {
+  this.name = name;
+  this.path = pictureFolder + path;
+  this.set = this[matchSystem];
   this.active = true;
+  this.match = match;
+  this.nomatch = nomatch;
 }
 
 // init array of tiles
-var sortedTiles = [
-  new Tile('kitten_01.jpg'),
-  new Tile('kitten_02.jpg'),
-  new Tile('kitten_03.jpg'),
-  new Tile('kitten_04.jpg'),
-  new Tile('kitten_05.jpg'),
-  new Tile('kitten_06.jpg'),
-  new Tile('kitten_07.jpg'),
-  new Tile('kitten_08.jpg'),
-  new Tile('kitten_01.jpg'),
-  new Tile('kitten_02.jpg'),
-  new Tile('kitten_03.jpg'),
-  new Tile('kitten_04.jpg'),
-  new Tile('kitten_05.jpg'),
-  new Tile('kitten_06.jpg'),
-  new Tile('kitten_07.jpg'),
-  new Tile('kitten_08.jpg'),
-  new Tile('kitten_09.jpg'),
-  new Tile('kitten_10.jpg'),
-  new Tile('kitten_11.jpg'),
-  new Tile('kitten_12.jpg'),
-  new Tile('kitten_09.jpg'),
-  new Tile('kitten_10.jpg'),
-  new Tile('kitten_11.jpg'),
-  new Tile('kitten_12.jpg')
-];
 
 // shuffle the array of tiles
-var randomTiles = shuffle(sortedTiles.slice(0));
 
 // check if there is a saved state
 if (localStorage.getItem('reloadAvailable')) {
@@ -101,7 +83,14 @@ if (localStorage.getItem('reloadAvailable')) {
   reloadTiles();
 } else {
   // console.log(JSON.stringify(flipped));
-  setState();
+  chooseTheme();
+  randomTiles = shuffle(sortedTiles.slice(0));
+  localStorage.setItem('flipped', JSON.stringify(flipped));
+  localStorage.setItem('tilesRemain', tilesRemain);
+  localStorage.setItem('playersSaved', JSON.stringify(playersSaved));
+  localStorage.setItem('randomTiles', JSON.stringify(randomTiles));
+  localStorage.setItem('currentPlayerIndex', 0);
+  localStorage.setItem('reloadAvailable', 'true');
 }
 
 
@@ -109,7 +98,20 @@ if (localStorage.getItem('reloadAvailable')) {
 new Player(playersSaved[0]);
 var currentPlayer = players[0];
 currentPlayer.update();
-createOrUpdatePlayerInfo();
+currentPlayer.opponent = currentPlayer;
+// [getPlayerName(), 0, startTurns, 0]
+if (playersSaved.length == 2) {
+  new Player(playersSaved[1]);
+  currentPlayer = players[Math.round()];
+  players[0].opponent = players[1];
+  players[1].opponent = players[0];
+  players[0].namefield = 'name_1';
+  players[0].turnsfield = 'turns_1';
+  players[0].scorefield = 'score_1';
+  players[1].namefield = 'name_2';
+  players[1].turnsfield = 'turns_2';
+  players[1].scorefield = 'score_2';
+}
 
 // FUNCTIONS =====
 
@@ -133,6 +135,7 @@ function checkMatch(){
     // if match is found
     matchFound(flipped[0]);
     matchFound(flipped[1]);
+    currentPlayer.turns += correctBonus;
   } else {
     // finally call flipTile on both elements
     flipTile(flipped[1]);
@@ -143,6 +146,7 @@ function checkMatch(){
   clearFlippedArray();
   // remove turn from current Player
   removeTurn();
+  currentPlayer = currentPlayer.opponent;
   // check if game is over
   checkGameOver();
 }
@@ -153,11 +157,10 @@ function matchFound(elementId){
   var clickedTile = document.getElementById(elementId);
   // subtract from remaining tiles
   tilesRemain --;
-  currentPlayer.turns ++;
   // deactivates tile
   tile(elementId).active = false;
   // TODO: visual cue of deactivated state ie opacity for now
-  clickedTile.setAttribute('style', 'opacity: 0.4');
+  clickedTile.setAttribute('style', 'opacity: ' + opacitySetting);
 }
 
 // CRUD Functions =====
@@ -173,15 +176,6 @@ function getPlayerName(){
 //   var parsedPlayerInfo = JSON.parse(stringifiedPlayerInfo);
 //   return parsedPlayerInfo;
 // }
-
-function setState(){
-  localStorage.setItem('flipped', JSON.stringify(flipped));
-  localStorage.setItem('tilesRemain', tilesRemain);
-  localStorage.setItem('playersSaved', JSON.stringify(playersSaved));
-  localStorage.setItem('randomTiles', JSON.stringify(randomTiles));
-  localStorage.setItem('currentPlayerIndex', 0);
-  localStorage.setItem('reloadAvailable', 'true');
-}
 
 // function retrievePlayerName() {
 //   var playerInfo = retrievePlayerInfo();
@@ -256,7 +250,7 @@ function reloadTiles () {
     var clickedTile = document.getElementById(elementId);
     if (!tile(elementId).active) {
       clickedTile.setAttribute('src', tile(elementId).path);
-      clickedTile.setAttribute('style', 'opacity: 0.4');
+      clickedTile.setAttribute('style', 'opacity: ' + opacitySetting);
     } else if (flipped.includes(elementId)) {
       clickedTile.setAttribute('src', tile(elementId).path);
       clickedTile.setAttribute('style', 'opacity: 1.0');
@@ -265,4 +259,52 @@ function reloadTiles () {
       clickedTile.setAttribute('style', 'opacity: 1.0');
     }
   }
+}
+
+
+
+function nada () {
+  // does what it says.  Placeholder for functions
+}
+
+function chooseTheme(theme) {
+  if (theme == 'your theme goes here') {
+    pass;
+    // matchSystem = 'name';  Your options are either 'name' or 'path'
+    // var defaultTileBack = 'temp/facedown.gif'; back of tile
+    // var pictureFolder = 'temp/'; folder for your images
+    // var opacitySetting = 0.4; opacity setting after match
+    // sortedTiles = generateKittenTiles();
+  } else {
+    sortedTiles = generateKittenTiles();
+  }
+}
+
+
+function generateKittenTiles () {
+  return(
+  [new Tile('name', 'kitten_01.jpg', nada, nada),
+    new Tile('name', 'kitten_02.jpg', nada, nada),
+    new Tile('name', 'kitten_03.jpg', nada, nada),
+    new Tile('name', 'kitten_04.jpg', nada, nada),
+    new Tile('name', 'kitten_05.jpg', nada, nada),
+    new Tile('name', 'kitten_06.jpg', nada, nada),
+    new Tile('name', 'kitten_07.jpg', nada, nada),
+    new Tile('name', 'kitten_08.jpg', nada, nada),
+    new Tile('name', 'kitten_01.jpg', nada, nada),
+    new Tile('name', 'kitten_02.jpg', nada, nada),
+    new Tile('name', 'kitten_03.jpg', nada, nada),
+    new Tile('name', 'kitten_04.jpg', nada, nada),
+    new Tile('name', 'kitten_05.jpg', nada, nada),
+    new Tile('name', 'kitten_06.jpg', nada, nada),
+    new Tile('name', 'kitten_07.jpg', nada, nada),
+    new Tile('name', 'kitten_08.jpg', nada, nada),
+    new Tile('name', 'kitten_09.jpg', nada, nada),
+    new Tile('name', 'kitten_10.jpg', nada, nada),
+    new Tile('name', 'kitten_11.jpg', nada, nada),
+    new Tile('name', 'kitten_12.jpg', nada, nada),
+    new Tile('name', 'kitten_09.jpg', nada, nada),
+    new Tile('name', 'kitten_10.jpg', nada, nada),
+    new Tile('name', 'kitten_11.jpg', nada, nada),
+    new Tile('name', 'kitten_12.jpg', nada, nada)]);
 }
