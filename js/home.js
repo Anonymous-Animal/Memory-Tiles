@@ -30,6 +30,7 @@ function readInput() {
   inputArea.style.display = 'none';
   var outputArea = document.getElementById('outputArea');
   outputArea.style.display = 'block';
+  localStorage.removeItem('reloadAvailable');
   var inputName = document.getElementById('inputName').value;
   document.getElementById('userName').innerHTML = inputName;
 

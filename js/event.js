@@ -14,7 +14,7 @@ function eventHandler(event){
   var elementId = event.target.getAttribute('id');
   // DELETEME
   // console.log(elementId);
-  if(flipped.length == 2){
+  if (flipped.length == 2){
     checkMatch();
     localStorage.setItem('tilesRemain', tilesRemain);
     localStorage.setItem('randomTiles', JSON.stringify(randomTiles));

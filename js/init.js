@@ -12,6 +12,8 @@ var startTurns = gridSize * 2;
 var flipped = [];
 var players = [];
 var idIndex = [];
+// determines which object properties are used for finding matches.  0 = name, 1 = path.
+var matchFinder = 0;
 var playersSaved = [[getPlayerName(), 0, startTurns, 0]];
 
 for (var i = 0; i < gridSize; i++) {
@@ -48,33 +50,48 @@ Player.prototype.update = function (){
 };
 
 
+// determines how matches are found.
+if (matchFinder) {
+  this.set = this.path;
+} else {
+  this.set = this.name;
+};
+
+
 // per tile
-function Tile(path){
+function Tile(name, path){
+  this.name = name;
   this.path = 'temp/' + path;
+  if (matchFinder) {
+    this.set = this.path;
+  } else {
+    this.set = this.name;
+  }
   this.active = true;
 }
+
 
 //DELETEME
 console.log(currentPlayer);
 
 // init array of tiles
 var sortedTiles = [
-  new Tile('kitten_01.jpg'),
-  new Tile('kitten_02.jpg'),
-  new Tile('kitten_03.jpg'),
-  new Tile('kitten_04.jpg'),
-  new Tile('kitten_05.jpg'),
-  new Tile('kitten_06.jpg'),
-  new Tile('kitten_07.jpg'),
-  new Tile('kitten_08.jpg'),
-  new Tile('kitten_01.jpg'),
-  new Tile('kitten_02.jpg'),
-  new Tile('kitten_03.jpg'),
-  new Tile('kitten_04.jpg'),
-  new Tile('kitten_05.jpg'),
-  new Tile('kitten_06.jpg'),
-  new Tile('kitten_07.jpg'),
-  new Tile('kitten_08.jpg')
+  new Tile('kitten_01', 'kitten_01.jpg', nada, nada, nada),
+  new Tile('kitten_02', 'kitten_02.jpg', nada, nada, nada),
+  new Tile('kitten_03', 'kitten_03.jpg', nada, nada, nada),
+  new Tile('kitten_04', 'kitten_04.jpg', nada, nada, nada),
+  new Tile('kitten_05', 'kitten_05.jpg', nada, nada, nada),
+  new Tile('kitten_06', 'kitten_06.jpg', nada, nada, nada),
+  new Tile('kitten_07', 'kitten_07.jpg', nada, nada, nada),
+  new Tile('kitten_08', 'kitten_08.jpg', nada, nada, nada),
+  new Tile('kitten_01', 'kitten_01.jpg', nada, nada, nada),
+  new Tile('kitten_02', 'kitten_02.jpg', nada, nada, nada),
+  new Tile('kitten_03', 'kitten_03.jpg', nada, nada, nada),
+  new Tile('kitten_04', 'kitten_04.jpg', nada, nada, nada),
+  new Tile('kitten_05', 'kitten_05.jpg', nada, nada, nada),
+  new Tile('kitten_06', 'kitten_06.jpg', nada, nada, nada),
+  new Tile('kitten_07', 'kitten_07.jpg', nada, nada, nada),
+  new Tile('kitten_08', 'kitten_08.jpg', nada, nada, nada)
 ];
 
 // shuffle the array of tiles
@@ -127,7 +144,7 @@ function tile(elementId){
 // checks to see if tiles are matching
 function checkMatch(){
   // checks flipped array to see if tiles are matching
-  if(tile(flipped[0]).path == tile(flipped[1]).path){
+  if(tile(flipped[0]).set == tile(flipped[1]).set){
     // iterate points to current player
     addPoints();
     // if match is found
@@ -234,6 +251,7 @@ function checkGameOver(){
     // TODO: trigger game over page
     localStorage.setItem('remain', tilesRemain);
     createOrUpdatePlayerInfo();
+    localStorage.removeItem('reloadAvailable');
     window.location.href = 'results.html';
     console.log('Game Over!');
   }
@@ -254,4 +272,8 @@ function reloadTiles () {
       clickedTile.setAttribute('style', 'opacity: 1.0');
     }
   }
+}
+
+function nada (name) {
+  // this app is just a placeholder
 }
