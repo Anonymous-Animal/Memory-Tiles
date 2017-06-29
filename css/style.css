@@ -33,7 +33,7 @@ button {
   font-family:  'Acme', sans-serif;
 }
 
-#directions {
+#directionlist {
   font-family:  'Quicksand', sans-serif;
   list-style-type: none;
 }
@@ -94,8 +94,19 @@ button {
   margin: 10% auto 0 auto;
 }
 
-#outputArea {
+#area > #outputArea {
   display: none;
+}
+
+#area > #outputArea * {
+  display: block;
+  margin: auto;
+  text-align: center;
+  margin-top: 5px;
+}
+
+#outputArea > ul {
+  padding-left: 0px;
 }
 
 #userName {
@@ -107,12 +118,13 @@ button {
   margin: 60px auto;
 }
 
-
 /*******Main Page (Game Page) Styling Rules********/
 
 #sidebar {
   float: left;
   width: 20%;
+  margin-top: 50px;
+  margin-left: 1%;
 }
 
 aside, nav {
@@ -150,13 +162,14 @@ nav {
 #tileGrid {
   background-color: white;
   float: left;
-  width: 50%;
-  margin: auto 10%;
+  width: 75%;
+  margin-top: 50px;
+  margin-left: 2%;
 }
 
-.row {
+.column {
   float: left;
-  width: 24%;
+  width: 15.65%;
   margin: .5%;
 }
 
@@ -168,7 +181,7 @@ img {
   padding-bottom: 2px;
 }
 
-/****************Index Page Styling****************/
+/****************Results Page Styling****************/
 
 #outputarea {
   display: block;
@@ -184,66 +197,6 @@ img {
   text-decoration: none;
   padding-bottom: 15px;
 }
-
-/****************12-Column Grid Rules**************/
-
-/*.row::before,
-.row::after {
-  content: "";
-}*/
-/*
-.column {
-  position: relative;
-  float: left;
-}
-
-.col-1 {
-  width: 8.33%;
-}
-
-.col-2 {
-  width: 16.66%;
-}
-
-.col-3 {
-  width: 24.98%;
-}
-
-.col-4 {
-  width: 33.32%;
-}
-
-.col-5 {
-  width: 41.65%;
-}
-
-.col-6 {
-  width: 49.98%;
-}
-
-.col-7 {
-  width: 58.3%;
-}
-
-.col-8 {
-  width: 66.66%;
-}
-
-.col-9 {
-  width: 74.97%;
-}
-
-.col-10 {
-  width: 83.3%;
-}
-
-.col-11 {
-  width: 91.66%;
-}
-
-.col-12 {
-  width: 100%;
-}*/
 
 .splash {
   position: fixed;
@@ -266,3 +219,4 @@ img {
   vertical-align: middle;
   text-align: center;
 }
+
