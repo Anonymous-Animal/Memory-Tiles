@@ -7,7 +7,7 @@ var gridSize = 24;
 // tiles remaining after clicked
 var tilesRemain = gridSize;
 // the total number of turns for the entire game
-var startTurns = Math.floor(gridSize * .75);
+var startTurns = Math.floor(gridSize * .5);
 // array of flipped Tiles
 var flipped = [];
 var players = [];
@@ -73,7 +73,15 @@ var sortedTiles = [
   new Tile('kitten_05.jpg'),
   new Tile('kitten_06.jpg'),
   new Tile('kitten_07.jpg'),
-  new Tile('kitten_08.jpg')
+  new Tile('kitten_08.jpg'),
+  new Tile('kitten_09.jpg'),
+  new Tile('kitten_10.jpg'),
+  new Tile('kitten_11.jpg'),
+  new Tile('kitten_12.jpg'),
+  new Tile('kitten_09.jpg'),
+  new Tile('kitten_10.jpg'),
+  new Tile('kitten_11.jpg'),
+  new Tile('kitten_12.jpg')
 ];
 
 // shuffle the array of tiles
