@@ -1,7 +1,7 @@
 /****************Global Styling****************/
 
 body {
-  background-color: rgb(64, 158, 125)
+  background-color: black;
 }
 
 .mainblock {
@@ -19,6 +19,12 @@ button {
 }
 
 /*************Index Page Styling****************/
+
+#indexpage {
+  background-image: url("../images/background.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
 
 #startButton {
   font-family:  'Acme', sans-serif;
@@ -42,7 +48,7 @@ button {
 
   display: block;
   width: 70%;
-  margin: 30px auto;
+  margin: 100px auto;
 }
 
 #titlearea {
@@ -53,15 +59,15 @@ button {
 
 #titlearea > h1 {
   font-family: 'Lobster', cursive;
-  font-size: 3em;
+  font-size: 5em;
   text-align: center;
   margin: 0px;
-  padding-top: 40px;
+  padding-top: 20px;
 }
 
 #area {
   background-color: white;
-  margin-top: 30px;
+  margin-top: 100px;
 }
 
 #inputArea, #outputArea {
@@ -183,20 +189,59 @@ img {
 
 /****************Results Page Styling****************/
 
+#resultspage {
+  background-image: url("../images/background.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+#resultsarea {
+  background-color: white;
+  border: 5px solid black;
+  /*height: 220px;*/
+  font-family: 'Lobster', cursive;
+  text-align: center;
+}
+
+#resultsarea > h1 {
+  font-size: 5em;
+  margin: 0px;
+  padding-top: 20px;
+}
+
+#resultsarea > h3 {
+  font-size: 3em;
+  margin: 0px;
+  padding-top: 15px;
+  padding-bottom: 30px;
+}
+
 #outputarea {
   display: block;
   background-color: white;
   text-align: center;
   font-family:  'Acme', sans-serif;
   margin-top: 20px;
+  height: 200px;
+}
+
+#marginline {
+  margin-top: 35px;
 }
 
 #playagain {
   display: block;
-  margin: auto;
+  margin: 35px auto;
   text-decoration: none;
-  padding-bottom: 15px;
+  font-size: 1.5em;
+  transition: 1s;
 }
+
+#playagain:hover {
+  font-size: 2.5em;
+  transition: 1s;
+}
+
 
 .splash {
   position: fixed;
@@ -224,4 +269,236 @@ img {
   border: 2px white;
   box-shadow: 3px 3px 3px #000;
   margin-bottom: 2px;
+}
+
+/********************ANIMATIONS**********************/
+
+@keyframes lightup1 {
+  0% {
+    color: yellow;
+  }
+  9% {
+    color: black;
+  }
+  100% {
+    color: black;
+  }
+}
+
+@keyframes lightup2 {
+  0% {
+    color: black;
+  }
+  9% {
+    color: yellow;
+  }
+  18% {
+    color: black;
+  }
+  100% {
+    color: black;
+  }
+}
+
+@keyframes lightup3 {
+  0% {
+    color: black;
+  }
+  9% {
+    color: black;
+  }
+  18% {
+    color: yellow;
+  }
+  27% {
+    color: black;
+  }
+  100% {
+    color: black;
+  }
+}
+
+@keyframes lightup4 {
+  0% {
+    color: black;
+  }
+  18% {
+    color: black;
+  }
+  27% {
+    color: yellow;
+  }
+  36% {
+    color: black;
+  }
+  100% {
+    color: black;
+  }
+}
+
+@keyframes lightup5 {
+  0% {
+    color: black;
+  }
+  27% {
+    color: black;
+  }
+  36% {
+    color: yellow;
+  }
+  45% {
+    color: black;
+  }
+  100% {
+    color: black;
+  }
+}
+
+@keyframes lightup6 {
+  0% {
+    color: black;
+  }
+  36% {
+    color: black;
+  }
+  45% {
+    color: yellow;
+  }
+  54% {
+    color: black;
+  }
+  100% {
+    color: black;
+  }
+}
+
+@keyframes lightup7 {
+  0% {
+    color: black;
+  }
+  45% {
+    color: black;
+  }
+  54% {
+    color: yellow;
+  }
+  63% {
+    color: black;
+  }
+  100% {
+    color: black;
+  }
+}
+
+@keyframes lightup8 {
+  0% {
+    color: black;
+  }
+  54% {
+    color: black;
+  }
+  63% {
+    color: yellow;
+  }
+  72% {
+    color: black;
+  }
+  100% {
+    color: black;
+  }
+}
+
+@keyframes lightup9 {
+  0% {
+    color: black;
+  }
+  63% {
+    color: black;
+  }
+  72% {
+    color: yellow;
+  }
+  81% {
+    color: black;
+  }
+  100% {
+    color: black;
+  }
+}
+
+@keyframes lightup10 {
+  0% {
+    color: black;
+  }
+  72% {
+    color: black;
+  }
+  81% {
+    color: yellow;
+  }
+  90% {
+    color: black;
+  }
+  100% {
+    color: black;
+  }
+}
+
+@keyframes lightup11 {
+  0% {
+    color: black;
+  }
+  81% {
+    color: black;
+  }
+  90% {
+    color: yellow;
+  }
+  100% {
+    color: black;
+  }
+}
+
+#a1 {
+  animation: lightup1 3s infinite;
+}
+
+#a2 {
+  animation: lightup2 3s infinite;
+}
+
+#a3 {
+  animation: lightup3 3s infinite;
+}
+
+#a4 {
+  animation: lightup4 3s infinite;
+}
+
+#a5 {
+  animation: lightup5 3s infinite;
+}
+
+#a6 {
+  animation: lightup6 3s infinite;
+}
+
+#a7 {
+  animation: lightup7 3s infinite;
+}
+
+#a8 {
+  animation: lightup8 3s infinite;
+}
+
+#a9 {
+  animation: lightup9 3s infinite;
+}
+
+#a10 {
+  animation: lightup10 3s infinite;
+}
+
+#a11 {
+  animation: lightup11 3s infinite;
 }
