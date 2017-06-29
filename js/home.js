@@ -40,6 +40,9 @@ function readInput() {
   changeAreaDisplay('inputArea', 'none');
   changeAreaDisplay('outputArea', 'block');
   var inputName = document.getElementById('inputName').value;
+  if(!inputName){
+    inputName = 'User';
+  }
   document.getElementById('userName').innerHTML = inputName;
   setPlayerName(inputName);
 }
