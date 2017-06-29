@@ -250,7 +250,7 @@ img {
   padding: 20px;
   font-family:  'Acme', sans-serif;
   font-size: 1.5em;
-  vertical-align:
+  vertical-align: middle;
   text-align: center;
 }
 

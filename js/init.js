@@ -279,22 +279,19 @@ function nada (name) {
   // this app is just a placeholder
 }
 
-var directionsText = ['How to Play', 'Click two tiles at a time.  You gain a turn if they match, and lose a turn if you don\'t.  Try to match them all before you run out of time!'];
+var directionsText = ['How to Play:', 'Click two tiles at a time.', 'You gain a turn if they match, and lose a turn if you don\'t.', 'Try to match them all before you run out of time!'];
 
 splashFunction(directionsText);
 
 function splashFunction(textArray) {
   console.log(textArray);
   var splash = document.getElementById('splash');
-  var splashText = '';
   if (textArray) {
     splash.innerHTML = '';
     console.log(splash.innerHTML);
-    for (var i = 0; i < textArray.lenth; i++) {
-      splash.innerHTML = splash.innerHTML + textArray[i];
-      console.log(splashText);
+    for (var i = 0; i < textArray.length; i++) {
+      splash.innerHTML = splash.innerHTML + '<p>' + textArray[i] + '</p>';
     }
-    splash.innerHTML = splashText;
   }
   if (splash.style.display === 'none') {
     splash.style.display = 'block';

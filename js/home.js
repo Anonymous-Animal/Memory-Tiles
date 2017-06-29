@@ -7,16 +7,10 @@ var area = document.getElementById('area');
 var buttonDiv = document.createElement('div');
 
 
-renderContinueButton();
 eventListener();
 
-function renderContinueButton(){
-  continueButton.innerHTML = 'Or... Continue Previous Game';
-  continueButton.setAttribute('id', 'continue');
-  continueButton.setAttribute('onclick', 'location.href=\'main.html\';');
-
-  area.appendChild(buttonDiv);
-  buttonDiv.appendChild(continueButton);
+if (!localStorage.getItem('reloadAvailable')) {
+  document.getElementById('continue').style.display = 'none';
 }
 
 // event listener function
@@ -32,8 +26,10 @@ function readInput() {
   outputArea.style.display = 'block';
   localStorage.removeItem('reloadAvailable');
   var inputName = document.getElementById('inputName').value;
+  if (!inputName) {
+    inputName = 'User 1';
+  }
   document.getElementById('userName').innerHTML = inputName;
-
   setPlayerName(inputName);
 }
 
