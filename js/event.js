@@ -53,7 +53,7 @@ function flipTile(elementId){
     flipped.push(elementId);
   } else {
     // TODO: return img to unflipped
-    clickedTile.setAttribute('src', 'temp/facedown.gif');
+    clickedTile.setAttribute('src', defaultTileBack);
     // remove element
     // console.log('before: ' + flipped);
     flipped.splice(flipped.indexOf(elementId), 1);
