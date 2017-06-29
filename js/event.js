@@ -1,16 +1,25 @@
 'use strict';
 // create parents
 var tileGridParent = document.getElementById('tileGrid');
+var newGameButton = document.getElementById('home');
+
+ // onClick="location.href='index.html';
 
 // call event listener
 eventListener();
 
 // event listener function
 function eventListener(){
-  tileGridParent.addEventListener('click', eventHandler);
+  tileGridParent.addEventListener('click', clickTileHandler);
+  newGameButton.addEventListener('click', triggerNewGame);
+}
+
+function triggerNewGame(){
+  localStorage.removeItem('reloadAvailable');
+  window.location.href = 'index.html';
 }
 // event handler
-function eventHandler(event){
+function clickTileHandler(event){
   var elementId = event.target.getAttribute('id');
   // DELETEME
   // console.log(elementId);

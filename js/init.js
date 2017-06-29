@@ -14,6 +14,7 @@ var players = [];
 var idIndex = [];
 var playersSaved = [[getPlayerName(), 0, startTurns, 0]];
 
+// accounts for naming convention of tiles
 for (var i = 0; i < gridSize; i++) {
   if (i < 9) {
     idIndex.push('tile0' + (i + 1));
@@ -24,12 +25,12 @@ for (var i = 0; i < gridSize; i++) {
 
 // OBJ CONSTRUCTOR =====
 
-// per player
-function Player (myArray) {
-  this.name = myArray[0];
-  this.index = myArray[1];
-  this.turns = myArray[2];
-  this.points = myArray[3];
+// each player is constructed as an array value within playersSaved master array
+function Player (playerArray) {
+  this.name = playerArray[0];
+  this.index = playerArray[1];
+  this.turns = playerArray[2];
+  this.points = playerArray[3];
   // add pull name local storage
   this.namefield = 'name_' + this.index;
   this.turnsfield = 'turns_' + this.index;
@@ -48,14 +49,11 @@ Player.prototype.update = function (){
 };
 
 
-// per tile
+// per tile as object
 function Tile(path){
   this.path = 'temp/' + path;
   this.active = true;
 }
-
-//DELETEME
-console.log(currentPlayer);
 
 // init array of tiles
 var sortedTiles = [
@@ -80,9 +78,9 @@ var sortedTiles = [
 // shuffle the array of tiles
 var randomTiles = shuffle(sortedTiles.slice(0));
 
-
-
+// check if there is a saved state
 if (localStorage.getItem('reloadAvailable')) {
+  // resets flipped array
   if (!flipped[0]) {
     flipped = [];
   }
@@ -93,13 +91,8 @@ if (localStorage.getItem('reloadAvailable')) {
   currentPlayer = parseInt(localStorage.getItem('currentPlayerIndex'));
   reloadTiles();
 } else {
-  localStorage.setItem('flipped', JSON.stringify(flipped));
-  console.log(JSON.stringify(flipped));
-  localStorage.setItem('tilesRemain', tilesRemain);
-  localStorage.setItem('playersSaved', JSON.stringify(playersSaved));
-  localStorage.setItem('randomTiles', JSON.stringify(randomTiles));
-  localStorage.setItem('currentPlayerIndex', 0);
-  localStorage.setItem('reloadAvailable', 'true');
+  // console.log(JSON.stringify(flipped));
+  setState();
 }
 
 
@@ -108,8 +101,6 @@ new Player(playersSaved[0]);
 var currentPlayer = players[0];
 currentPlayer.update();
 createOrUpdatePlayerInfo();
-// DELETEME test local storage
-// console.log(retrievePlayerInfo());
 
 // FUNCTIONS =====
 
@@ -177,27 +168,36 @@ function retrievePlayerInfo() {
   return parsedPlayerInfo;
 }
 
-function retrievePlayerName() {
-  var playerInfo = retrievePlayerInfo();
-  var playerName = playerInfo.name;
-  return playerName;
+function setState(){
+  localStorage.setItem('flipped', JSON.stringify(flipped));
+  localStorage.setItem('tilesRemain', tilesRemain);
+  localStorage.setItem('playersSaved', JSON.stringify(playersSaved));
+  localStorage.setItem('randomTiles', JSON.stringify(randomTiles));
+  localStorage.setItem('currentPlayerIndex', 0);
+  localStorage.setItem('reloadAvailable', 'true');
 }
 
-function retrieveTurnCount() {
-  var playerInfo = retrievePlayerInfo();
-  var turnCount = playerInfo.turns;
-  return turnCount;
-}
-
-function retrievePoints() {
-  var playerInfo = retrievePlayerInfo();
-  var points = playerInfo.points;
-  return points;
-}
-
-function deletePlayerInfo () {
-  localStorage.clear();
-}
+// function retrievePlayerName() {
+//   var playerInfo = retrievePlayerInfo();
+//   var playerName = playerInfo.name;
+//   return playerName;
+// }
+//
+// function retrieveTurnCount() {
+//   var playerInfo = retrievePlayerInfo();
+//   var turnCount = playerInfo.turns;
+//   return turnCount;
+// }
+//
+// function retrievePoints() {
+//   var playerInfo = retrievePlayerInfo();
+//   var points = playerInfo.points;
+//   return points;
+// }
+//
+// function deletePlayerInfo () {
+//   localStorage.clear();
+// }
 
 // HELPER FUNCTIONS =====
 
@@ -231,11 +231,9 @@ function addPoints(){
 
 function checkGameOver(){
   if(currentPlayer.turns == 0 || tilesRemain == 0){
-    // TODO: trigger game over page
     localStorage.setItem('remain', tilesRemain);
     createOrUpdatePlayerInfo();
     window.location.href = 'results.html';
-    console.log('Game Over!');
   }
 }
 
@@ -254,4 +252,8 @@ function reloadTiles () {
       clickedTile.setAttribute('style', 'opacity: 1.0');
     }
   }
+}
+
+function displayDirections(){
+  alert('Click on the tiles to match.\nEach matching pair gains you a point.\nOnce all of the matches have been found, you win.\nIf you run out of turns, you lose.');
 }
