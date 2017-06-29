@@ -105,14 +105,17 @@ button {
 }
 
 #area > #outputArea * {
-  display: block;
   margin: auto;
-  text-align: center;
   margin-top: 5px;
 }
 
+#outputArea > h2 {
+  display: block;
+  text-align: center;
+}
+
 #outputArea > ul {
-  padding-left: 0px;
+  padding: 0px;
 }
 
 #userName {
@@ -195,6 +198,11 @@ img {
 
 /****************Results Page Styling****************/
 
+#motivational {
+  font-family: Quicksand, sans-serif;
+  font-size: 0.85em;
+}
+
 #resultspage {
   background-image: url("../images/background.jpg");
   background-repeat: no-repeat;
@@ -272,13 +280,14 @@ img {
 }
 
 .column > img {
-  border: 2px white;
-  box-shadow: 3px 3px 3px #000;
+  /*border: 2px white;*/
+  /*box-shadow: 3px 3px 3px #000;*/
   margin-bottom: 2px;
 }
 
 .column > img:hover {
-  transform: scale(1.05);
+  transform: scale(1.1);
+}
 
 /********************ANIMATIONS**********************/
 

@@ -4,7 +4,7 @@
 
 // size of the grid
 
-var directionsText = ['How to Play:', 'Click two tiles at a time.', 'You gain a turn if they match, and lose a turn if you don\'t.', 'Try to match them all before you run out of time!'];
+var directionsText = ['How to Play:', 'Click on two tiles to match.', 'Click anywhere to submit.', 'You gain a turn and a point if they match.', 'You lose a turn if they don\'t match', 'Try to match them all before you run out of turns!'];
 
 splashFunction(directionsText);
 

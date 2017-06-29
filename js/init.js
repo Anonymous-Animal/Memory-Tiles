@@ -13,7 +13,7 @@ var flipped = [];
 var players = [];
 var idIndex = [];
 var playersSaved = [[getPlayerName(), 0, startTurns, 0]];
-var defaultTileBack = 'images/defaultTile.jpg';
+var defaultTileBack = 'images/defaultTile.png';
 
 // accounts for naming convention of tiles
 for (var i = 0; i < gridSize; i++) {
@@ -157,7 +157,7 @@ function matchFound(elementId){
   // deactivates tile
   tile(elementId).active = false;
   // TODO: visual cue of deactivated state ie opacity for now
-  clickedTile.setAttribute('style', 'opacity: 0.9');
+  clickedTile.setAttribute('style', 'opacity: 0.8');
   // clickedTile.setAttribute('transform', 'scale(1.5)');
 }
 
@@ -257,7 +257,7 @@ function reloadTiles () {
     var clickedTile = document.getElementById(elementId);
     if (!tile(elementId).active) {
       clickedTile.setAttribute('src', tile(elementId).path);
-      clickedTile.setAttribute('style', 'opacity: 0.9');
+      clickedTile.setAttribute('style', 'opacity: 0.8');
     } else if (flipped.includes(elementId)) {
       clickedTile.setAttribute('src', tile(elementId).path);
       clickedTile.setAttribute('style', 'opacity: 1.0');
