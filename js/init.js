@@ -3,7 +3,7 @@
 // GLOBAL VAR INIT =====
 
 // size of the grid
-var gridSize = 16;
+var gridSize = 24;
 // tiles remaining after clicked
 var tilesRemain = gridSize;
 // the total number of turns for the entire game
@@ -13,6 +13,7 @@ var flipped = [];
 var players = [];
 var idIndex = [];
 var playersSaved = [[getPlayerName(), 0, startTurns, 0]];
+var defaultTileBack = 'temp/facedown.gif';
 
 // accounts for naming convention of tiles
 for (var i = 0; i < gridSize; i++) {
@@ -148,7 +149,7 @@ function matchFound(elementId){
   // deactivates tile
   tile(elementId).active = false;
   // TODO: visual cue of deactivated state ie opacity for now
-  clickedTile.setAttribute('style', 'opacity: 0.25');
+  clickedTile.setAttribute('style', 'opacity: 0.4');
 }
 
 // CRUD Functions =====
@@ -158,16 +159,12 @@ function getPlayerName(){
   return sessionStorage.getItem('name');
 }
 
-function createOrUpdatePlayerInfo() {
-  var stringifiedPlayerInfo = JSON.stringify(currentPlayer);
-  localStorage.setItem('player', stringifiedPlayerInfo);
-}
 
-function retrievePlayerInfo() {
-  var stringifiedPlayerInfo = localStorage.getItem('player');
-  var parsedPlayerInfo = JSON.parse(stringifiedPlayerInfo);
-  return parsedPlayerInfo;
-}
+// function retrievePlayerInfo() {
+//   var stringifiedPlayerInfo = localStorage.getItem('player');
+//   var parsedPlayerInfo = JSON.parse(stringifiedPlayerInfo);
+//   return parsedPlayerInfo;
+// }
 
 function setState(){
   localStorage.setItem('flipped', JSON.stringify(flipped));
@@ -230,8 +227,14 @@ function addPoints(){
   currentPlayer.points++;
 }
 
+
+function createOrUpdatePlayerInfo() {
+  var stringifiedPlayerInfo = JSON.stringify(currentPlayer);
+  localStorage.setItem('player', stringifiedPlayerInfo);
+}
+
 function checkGameOver(){
-  if(currentPlayer.turns == 0 || tilesRemain == 0){
+  if(currentPlayer.turns <= 0 || tilesRemain <= 0){
     localStorage.setItem('remain', tilesRemain);
     createOrUpdatePlayerInfo();
     localStorage.removeItem('reloadAvailable');
@@ -245,17 +248,13 @@ function reloadTiles () {
     var clickedTile = document.getElementById(elementId);
     if (!tile(elementId).active) {
       clickedTile.setAttribute('src', tile(elementId).path);
-      clickedTile.setAttribute('style', 'opacity: 0.6');
+      clickedTile.setAttribute('style', 'opacity: 0.4');
     } else if (flipped.includes(elementId)) {
       clickedTile.setAttribute('src', tile(elementId).path);
       clickedTile.setAttribute('style', 'opacity: 1.0');
     } else {
-      clickedTile.setAttribute('src', 'temp/facedown.gif');
+      clickedTile.setAttribute('src', defaultTileBack);
       clickedTile.setAttribute('style', 'opacity: 1.0');
     }
   }
-}
-
-function displayDirections(){
-  alert('Click on the tiles to match.\nEach matching pair gains you a point.\nOnce all of the matches have been found, you win.\nIf you run out of turns, you lose.');
 }
