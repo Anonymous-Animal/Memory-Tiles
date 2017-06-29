@@ -7,7 +7,7 @@ var gridSize = 16;
 // tiles remaining after clicked
 var tilesRemain = gridSize;
 // the total number of turns for the entire game
-var startTurns = gridSize * 2;
+var startTurns = Math.floor(gridSize * .75);
 // array of flipped Tiles
 var flipped = [];
 var players = [];
@@ -153,6 +153,7 @@ function matchFound(elementId){
   var clickedTile = document.getElementById(elementId);
   // subtract from remaining tiles
   tilesRemain --;
+  currentPlayer.turns ++;
   // deactivates tile
   tile(elementId).active = false;
   // TODO: visual cue of deactivated state ie opacity for now
@@ -234,6 +235,7 @@ function checkGameOver(){
     // TODO: trigger game over page
     localStorage.setItem('remain', tilesRemain);
     createOrUpdatePlayerInfo();
+    localStorage.removeItem('reloadAvailable');
     window.location.href = 'results.html';
     console.log('Game Over!');
   }
