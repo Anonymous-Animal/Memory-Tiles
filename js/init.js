@@ -13,7 +13,7 @@ var flipped = [];
 var players = [];
 var idIndex = [];
 var playersSaved = [[getPlayerName(), 0, startTurns, 0]];
-var defaultTileBack = 'temp/facedown.gif';
+var defaultTileBack = 'images/defaultTile.jpg';
 
 // accounts for naming convention of tiles
 for (var i = 0; i < gridSize; i++) {
