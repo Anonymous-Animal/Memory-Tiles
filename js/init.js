@@ -278,9 +278,13 @@ function chooseTheme(theme) {
     // pictureFolder = 'temp/'; folder for your images
     // opacitySetting = 0.4; opacity setting after match
     // sortedTiles = generateKittenTiles(); constructor
+    // document.body.style.backgroundImage = "url('')";
   } else if (true) {
     defaultTileBack = 'chris/chris_facedown.jpg';
     pictureFolder = 'chris/';
+    document.getElementById('whichTheme').innerHTML = "Chris Mass Time";
+    document.body.style.backgroundImage = "url('')";
+    document.body.style.backgroundColor = "#555555";
     sortedTiles = generateChrisTiles();
   } else if (false) {
     sortedTiles = generateKittenSameTiles();
