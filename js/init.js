@@ -157,7 +157,8 @@ function matchFound(elementId){
   // deactivates tile
   tile(elementId).active = false;
   // TODO: visual cue of deactivated state ie opacity for now
-  clickedTile.setAttribute('style', 'opacity: 0.4');
+  clickedTile.setAttribute('style', 'opacity: 0.9');
+  // clickedTile.setAttribute('transform', 'scale(1.5)');
 }
 
 // CRUD Functions =====
@@ -179,7 +180,7 @@ function setState(){
   localStorage.setItem('tilesRemain', tilesRemain);
   localStorage.setItem('playersSaved', JSON.stringify(playersSaved));
   localStorage.setItem('randomTiles', JSON.stringify(randomTiles));
-  localStorage.setItem('currentPlayerIndex', 0);
+  localStorage.setItem('currentPlayerIndex', 1.0);
   localStorage.setItem('reloadAvailable', 'true');
 }
 
@@ -256,7 +257,7 @@ function reloadTiles () {
     var clickedTile = document.getElementById(elementId);
     if (!tile(elementId).active) {
       clickedTile.setAttribute('src', tile(elementId).path);
-      clickedTile.setAttribute('style', 'opacity: 0.4');
+      clickedTile.setAttribute('style', 'opacity: 0.9');
     } else if (flipped.includes(elementId)) {
       clickedTile.setAttribute('src', tile(elementId).path);
       clickedTile.setAttribute('style', 'opacity: 1.0');

@@ -120,6 +120,12 @@ button {
 
 /*******Main Page (Game Page) Styling Rules********/
 
+#mainpage {
+  background-image: url("../images/background.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
 #sidebar {
   float: left;
   width: 20%;
