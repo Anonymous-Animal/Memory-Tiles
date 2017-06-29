@@ -33,6 +33,7 @@ button {
   margin: auto;
   /*min-width: 150px;*/
   max-width: 90%;
+  display: block;
 }
 
 #outputArea h2{
@@ -106,7 +107,7 @@ button {
 
 #area > #outputArea * {
   margin: auto;
-  margin-top: 5px;
+  margin: 5px;
 }
 
 #outputArea > h2 {
