@@ -35,8 +35,8 @@ function Player (myArray) {
   this.turnsfield = 'turns_' + this.index;
   this.scorefield = 'score_' + this.index;
   this.saved = function (){
-    return([this.name, this.index, this.turns, this.points])
-  }
+    return([this.name, this.index, this.turns, this.points]);
+  };
   players.push(this);
 }
 
