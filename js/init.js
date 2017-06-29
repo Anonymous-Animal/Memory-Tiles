@@ -10,6 +10,7 @@ var tilesRemain = gridSize;
 var startTurns = 12;
 // array of flipped Tiles
 var correctBonus = 3;
+var wrongPenalty = 1;
 var flipped = [];
 var players = [];
 var idIndex = [];
@@ -71,6 +72,7 @@ function Tile (name, path, match, nomatch) {
 // check if there is a saved state
 if (localStorage.getItem('reloadAvailable')) {
   // resets flipped array
+  chooseTheme();
   if (!flipped[0]) {
     flipped = [];
   }
@@ -90,6 +92,7 @@ if (localStorage.getItem('reloadAvailable')) {
   localStorage.setItem('randomTiles', JSON.stringify(randomTiles));
   localStorage.setItem('currentPlayerIndex', 0);
   localStorage.setItem('reloadAvailable', 'true');
+  reloadTiles ();
 }
 
 
@@ -247,16 +250,16 @@ function checkGameOver(){
 function reloadTiles () {
   for (i = 0; i < randomTiles.length; i++) {
     var elementId = idIndex[i];
-    var clickedTile = document.getElementById(elementId);
+    var currentTile = document.getElementById(elementId);
     if (!tile(elementId).active) {
-      clickedTile.setAttribute('src', tile(elementId).path);
-      clickedTile.setAttribute('style', 'opacity: ' + opacitySetting);
+      currentTile.setAttribute('src', tile(elementId).path);
+      currentTile.setAttribute('style', 'opacity: ' + opacitySetting);
     } else if (flipped.includes(elementId)) {
-      clickedTile.setAttribute('src', tile(elementId).path);
-      clickedTile.setAttribute('style', 'opacity: 1.0');
+      currentTile.setAttribute('src', tile(elementId).path);
+      currentTile.setAttribute('style', 'opacity: 1.0');
     } else {
-      clickedTile.setAttribute('src', defaultTileBack);
-      clickedTile.setAttribute('style', 'opacity: 1.0');
+      currentTile.setAttribute('src', defaultTileBack);
+      currentTile.setAttribute('style', 'opacity: 1.0');
     }
   }
 }
@@ -268,15 +271,19 @@ function nada () {
 }
 
 function chooseTheme(theme) {
-  if (theme == 'your theme goes here') {
+  if (false) {
     pass;
     // matchSystem = 'name';  Your options are either 'name' or 'path'
-    // var defaultTileBack = 'temp/facedown.gif'; back of tile
-    // var pictureFolder = 'temp/'; folder for your images
-    // var opacitySetting = 0.4; opacity setting after match
+    // defaultTileBack = 'temp/facedown.gif'; back of tile
+    // pictureFolder = 'temp/'; folder for your images
+    // opacitySetting = 0.4; opacity setting after match
     // sortedTiles = generateKittenTiles(); constructor
   } else if (true) {
-    sortedTiles = generateKittenSameTiles()
+    defaultTileBack = 'chris/chris_facedown.jpg';
+    pictureFolder = 'chris/';
+    sortedTiles = generateChrisTiles();
+  } else if (false) {
+    sortedTiles = generateKittenSameTiles();
   } else {
     sortedTiles = generateKittenTiles();
   }
@@ -311,31 +318,49 @@ function generateKittenTiles () {
     new Tile('name', 'kitten_12.jpg', nada, nada)]);
 }
 
+//
+// function generateChrisTiles () {
+//   return(
+//   [new Tile('Christian Bale', 'bale_1.jpg', nada, nada),
+//     new Tile('Christian Bale', 'bale_1.jpg', nada, nada),
+//     new Tile('Christopher Eccleston', 'eccleston_1.jpg', nada, nada),
+//     new Tile('Christopher Eccleston', 'eccleston_1.jpg', nada, nada),
+//     new Tile('Chris Evans', 'evans_1.jpg', nada, nada),
+//     new Tile('Chris Evans', 'evans_1.jpg', nada, nada),
+//     new Tile('Chris Evans', 'evans_2.jpg', nada, nada),
+//     new Tile('Chris Evans', 'evans_2.jpg', nada, nada),
+//     new Tile('Chris Hemsworth', 'hemsworth_1.jpg', nada, nada),
+//     new Tile('Chris Hemsworth', 'hemsworth_1.jpg', nada, nada),
+//     new Tile('Chris Hemsworth', 'hemsworth_2.jpg', nada, nada),
+//     new Tile('Chris Hemsworth', 'hemsworth_2.jpg', nada, nada),
+// }
 
-function generateKittenSameTiles () {
+
+function generateChrisTiles () {
   return(
-  [new Tile('name', 'kitten_01.jpg', nada, nada),
-    new Tile('name', 'kitten_01.jpg', nada, nada),
-    new Tile('name', 'kitten_01.jpg', nada, nada),
-    new Tile('name', 'kitten_01.jpg', nada, nada),
-    new Tile('name', 'kitten_01.jpg', nada, nada),
-    new Tile('name', 'kitten_01.jpg', nada, nada),
-    new Tile('name', 'kitten_01.jpg', nada, nada),
-    new Tile('name', 'kitten_01.jpg', nada, nada),
-    new Tile('name', 'kitten_01.jpg', nada, nada),
-    new Tile('name', 'kitten_01.jpg', nada, nada),
-    new Tile('name', 'kitten_01.jpg', nada, nada),
-    new Tile('name', 'kitten_01.jpg', nada, nada),
-    new Tile('name', 'kitten_01.jpg', nada, nada),
-    new Tile('name', 'kitten_01.jpg', nada, nada),
-    new Tile('name', 'kitten_01.jpg', nada, nada),
-    new Tile('name', 'kitten_01.jpg', nada, nada),
-    new Tile('name', 'kitten_01.jpg', nada, nada),
-    new Tile('name', 'kitten_01.jpg', nada, nada),
-    new Tile('name', 'kitten_01.jpg', nada, nada),
-    new Tile('name', 'kitten_01.jpg', nada, nada),
-    new Tile('name', 'kitten_01.jpg', nada, nada),
-    new Tile('name', 'kitten_01.jpg', nada, nada),
-    new Tile('name', 'kitten_01.jpg', nada, nada),
-    new Tile('name', 'kitten_01.jpg', nada, nada)]);
+  [new Tile('Christian Bale', 'bale_1.jpg', nada, nada),
+    new Tile('Christian Bale', 'bale_1.jpg', nada, nada),
+    new Tile('Christopher Eccleston', 'eccleston_1.jpg', nada, nada),
+    new Tile('Christopher Eccleston', 'eccleston_1.jpg', nada, nada),
+    new Tile('Chris Evans', 'evans_1.jpg', nada, nada),
+    new Tile('Chris Evans', 'evans_1.jpg', nada, nada),
+    new Tile('Chris Evans', 'evans_2.jpg', nada, nada),
+    new Tile('Chris Evans', 'evans_2.jpg', nada, nada),
+    new Tile('Chris Hemsworth', 'hemsworth_1.jpg', nada, nada),
+    new Tile('Chris Hemsworth', 'hemsworth_1.jpg', nada, nada),
+    new Tile('Chris Hemsworth', 'hemsworth_2.jpg', nada, nada),
+    new Tile('Chris Hemsworth', 'hemsworth_2.jpg', nada, nada),
+    new Tile('Christopher Lee', 'lee_1.jpg', nada, nada),
+    new Tile('Christopher Lee', 'lee_1.jpg', nada, nada),
+    new Tile('Chris Pine', 'pine_1.jpg', nada, nada),
+    new Tile('Chris Pine', 'pine_1.jpg', nada, nada),
+    new Tile('Chris Pine', 'pine_2.jpg', nada, nada),
+    new Tile('Chris Pine', 'pine_2.jpg', nada, nada),
+    new Tile('Chris Pratt', 'pratt_1.jpg', nada, nada),
+    new Tile('Chris Pratt', 'pratt_1.jpg', nada, nada),
+    new Tile('Chris Pratt', 'pratt_2.jpg', nada, nada),
+    new Tile('Chris Pratt', 'pratt_2.jpg', nada, nada),
+    new Tile('Christopher Reeve', 'reeve_1.jpg', nada, nada),
+    new Tile('Christopher Reeve', 'reeve_1.jpg', nada, nada)
+  ]);
 }
