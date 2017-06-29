@@ -7,6 +7,8 @@
     <link href="https://fonts.googleapis.com/css?family=Acme|Lobster|Quicksand" rel="stylesheet">
   </head>
   <body>
+    <div class="splash" id="splash" onclick="splashFunction(directionsText)">
+    </div>
     <div id="sidebar" class="column col-3">
       <aside>
         <h1 class="mainlabel">Memory Tiles</h1>
@@ -22,9 +24,9 @@
           <p id="score_0">OOO</p>
       </aside>
       <nav>
-        <button type="button" id="directions" onclick="displayDirections()">Directions</button>
-        <button type="button" id="start" onClick="location.href='main.html';">Reset Tiles</button>
-        <button type="button" id="home">New Game</button>
+        <button type="button" id="directions" onclick="splashFunction();">Directions</button>
+        <button type="button" id="start" onClick="location.href='main.html'; localStorage.removeItem('reloadAvailable')">Reset</button>
+        <button type="button" id="home" onClick="location.href='index.html'">Back</button>
       </nav>
     </div>
     <main id="tileGrid">
@@ -67,5 +69,6 @@
     </main>
     <script src="js/init.js"></script>
     <script src="js/event.js"></script>
+    <script src="js/splash.js"></script>
   </body>
 </html>
