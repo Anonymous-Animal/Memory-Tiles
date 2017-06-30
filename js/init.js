@@ -104,7 +104,6 @@ if (localStorage.getItem('reloadAvailable')) {
   currentPlayer = parseInt(localStorage.getItem('currentPlayerIndex'));
   reloadTiles();
 } else {
-  // console.log(JSON.stringify(flipped));
   setState();
 }
 

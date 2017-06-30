@@ -9,12 +9,9 @@ splashFunction(directionsText);
 
 // to display splash page
 function splashFunction(textArray) {
-  console.log(textArray);
   var splash = document.getElementById('splash');
-  console.log(14, splash);
   if (textArray) {
     splash.innerHTML = '';
-    console.log(splash.innerHTML);
     for (var i = 0; i < textArray.length; i++) {
       splash.innerHTML = splash.innerHTML + '<p>' + textArray[i] + '</p>';
     }
