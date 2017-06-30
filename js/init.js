@@ -6,7 +6,7 @@ var gridSize = 24;
 // tiles remaining after clicked
 var tilesRemain = gridSize;
 // the total number of turns for the entire game
-var startTurns = Math.floor(gridSize * .5);
+var startTurns = 15;
 // array of flipped Tiles
 var flipped = [];
 // array of players
@@ -55,36 +55,36 @@ Player.prototype.update = function (){
 
 // per tile as object
 function Tile(path){
-  this.path = 'temp/' + path;
+  this.path = 'chris/' + path;
   this.active = true;
 }
 
 // init array of tiles
 var sortedTiles = [
-  new Tile('kitten_01.jpg'),
-  new Tile('kitten_02.jpg'),
-  new Tile('kitten_03.jpg'),
-  new Tile('kitten_04.jpg'),
-  new Tile('kitten_05.jpg'),
-  new Tile('kitten_06.jpg'),
-  new Tile('kitten_07.jpg'),
-  new Tile('kitten_08.jpg'),
-  new Tile('kitten_09.jpg'),
-  new Tile('kitten_10.jpg'),
-  new Tile('kitten_11.jpg'),
-  new Tile('kitten_12.jpg'),
-  new Tile('kitten_01.jpg'),
-  new Tile('kitten_02.jpg'),
-  new Tile('kitten_03.jpg'),
-  new Tile('kitten_04.jpg'),
-  new Tile('kitten_05.jpg'),
-  new Tile('kitten_06.jpg'),
-  new Tile('kitten_07.jpg'),
-  new Tile('kitten_08.jpg'),
-  new Tile('kitten_09.jpg'),
-  new Tile('kitten_10.jpg'),
-  new Tile('kitten_11.jpg'),
-  new Tile('kitten_12.jpg')
+  new Tile('bale_1.jpg'),
+  new Tile('bale_1.jpg'),
+  new Tile('eccleston_1.jpg'),
+  new Tile('eccleston_1.jpg'),
+  new Tile('evans_1.jpg'),
+  new Tile('evans_1.jpg'),
+  new Tile('evans_2.jpg'),
+  new Tile('evans_2.jpg'),
+  new Tile('hemsworth_1.jpg'),
+  new Tile('hemsworth_1.jpg'),
+  new Tile('hemsworth_2.jpg'),
+  new Tile('hemsworth_2.jpg'),
+  new Tile('lee_1.jpg'),
+  new Tile('lee_1.jpg'),
+  new Tile('pine_1.jpg'),
+  new Tile('pine_1.jpg'),
+  new Tile('pine_2.jpg'),
+  new Tile('pine_2.jpg'),
+  new Tile('pratt_1.jpg'),
+  new Tile('pratt_1.jpg'),
+  new Tile('pratt_2.jpg'),
+  new Tile('pratt_2.jpg'),
+  new Tile('walken_1.jpg'),
+  new Tile('walken_1.jpg')
 ];
 
 // shuffle the array of tiles
