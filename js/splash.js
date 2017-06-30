@@ -2,12 +2,12 @@
 
 // GLOBAL VAR INIT =====
 
-// size of the grid
-
+// text for splash page
 var directionsText = ['How to Play:', 'Click on two tiles to match.', 'Click anywhere to submit.', 'You gain a turn and a point if they match.', 'You lose a turn if they don\'t match.', 'Try to match them all before you run out of turns!'];
 
 splashFunction(directionsText);
 
+// to display splash page
 function splashFunction(textArray) {
   console.log(textArray);
   var splash = document.getElementById('splash');

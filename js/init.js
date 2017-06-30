@@ -1,7 +1,6 @@
 'use strict';
 
-// GLOBAL VAR INIT =====
-
+// INITIALIZE GLOBAL VARIABLES =====
 // size of the grid
 var gridSize = 24;
 // tiles remaining after clicked
@@ -10,12 +9,16 @@ var tilesRemain = gridSize;
 var startTurns = Math.floor(gridSize * .5);
 // array of flipped Tiles
 var flipped = [];
+// array of players
 var players = [];
+// array of id indeces
 var idIndex = [];
+// array of constructors to persist
 var playersSaved = [[getPlayerName(), 0, startTurns, 0]];
+// sets default tile
 var defaultTileBack = 'images/defaultTile.jpg';
 
-// accounts for naming convention of tiles
+// accounts for naming convention of tiles as set in main.html
 for (var i = 0; i < gridSize; i++) {
   if (i < 9) {
     idIndex.push('tile0' + (i + 1));
@@ -32,6 +35,7 @@ function Player (playerArray) {
   this.index = playerArray[1];
   this.turns = playerArray[2];
   this.points = playerArray[3];
+
   // add pull name local storage
   this.namefield = 'name_' + this.index;
   this.turnsfield = 'turns_' + this.index;
@@ -49,7 +53,6 @@ Player.prototype.update = function (){
   document.getElementById(this.scorefield).innerHTML = this.points;
 };
 
-
 // per tile as object
 function Tile(path){
   this.path = 'temp/' + path;
@@ -66,6 +69,10 @@ var sortedTiles = [
   new Tile('kitten_06.jpg'),
   new Tile('kitten_07.jpg'),
   new Tile('kitten_08.jpg'),
+  new Tile('kitten_09.jpg'),
+  new Tile('kitten_10.jpg'),
+  new Tile('kitten_11.jpg'),
+  new Tile('kitten_12.jpg'),
   new Tile('kitten_01.jpg'),
   new Tile('kitten_02.jpg'),
   new Tile('kitten_03.jpg'),
@@ -74,10 +81,6 @@ var sortedTiles = [
   new Tile('kitten_06.jpg'),
   new Tile('kitten_07.jpg'),
   new Tile('kitten_08.jpg'),
-  new Tile('kitten_09.jpg'),
-  new Tile('kitten_10.jpg'),
-  new Tile('kitten_11.jpg'),
-  new Tile('kitten_12.jpg'),
   new Tile('kitten_09.jpg'),
   new Tile('kitten_10.jpg'),
   new Tile('kitten_11.jpg'),
@@ -91,8 +94,9 @@ var randomTiles = shuffle(sortedTiles.slice(0));
 if (localStorage.getItem('reloadAvailable')) {
   // resets flipped array
   if (!flipped[0]) {
-    flipped = [];
+    clearFlippedArray();
   }
+  // gets persisted data
   flipped = JSON.parse(localStorage.getItem('flipped'));
   tilesRemain = localStorage.getItem('tilesRemain');
   playersSaved = JSON.parse(localStorage.getItem('playersSaved'));
@@ -103,7 +107,6 @@ if (localStorage.getItem('reloadAvailable')) {
   // console.log(JSON.stringify(flipped));
   setState();
 }
-
 
 // construct Player
 new Player(playersSaved[0]);
@@ -119,12 +122,12 @@ function tile(elementId){
   if(elementId.length < 4){
     return null;
   } else {
-    // console.log(randomTiles[parseInt(elementId.slice(4) - 1)]);
     return randomTiles[parseInt(elementId.slice(4) - 1)];
   }
 }
 
 // checks to see if tiles are matching
+// linter error, function is declared in init.js but used in event.js
 function checkMatch(){
   // checks flipped array to see if tiles are matching
   if(tile(flipped[0]).path == tile(flipped[1]).path){
@@ -138,7 +141,6 @@ function checkMatch(){
     flipTile(flipped[1]);
     flipTile(flipped[0]);
   }
-
   // clear array of flipped elements
   clearFlippedArray();
   // remove turn from current Player
@@ -146,7 +148,6 @@ function checkMatch(){
   // check if game is over
   checkGameOver();
 }
-
 
 // if match is found
 function matchFound(elementId){
@@ -156,55 +157,54 @@ function matchFound(elementId){
   currentPlayer.turns ++;
   // deactivates tile
   tile(elementId).active = false;
-  // TODO: visual cue of deactivated state ie opacity for now
+  // visual cue once match found
   clickedTile.setAttribute('style', 'opacity: 0.8');
-  // clickedTile.setAttribute('transform', 'scale(1.5)');
 }
 
-// CRUD Functions =====
+// checks if game is over
+function checkGameOver(){
+  if(currentPlayer.turns <= 0 || tilesRemain <= 0){
+    localStorage.setItem('remain', tilesRemain);
+    createOrUpdatePlayerInfo();
+    localStorage.removeItem('reloadAvailable');
+    window.location.href = 'results.html';
+  }
+}
+
+// reloads the tiles
+function reloadTiles() {
+  for (i = 0; i < randomTiles.length; i++) {
+    var elementId = idIndex[i];
+    var clickedTile = document.getElementById(elementId);
+    if (!tile(elementId).active) {
+      clickedTile.setAttribute('src', tile(elementId).path);
+      clickedTile.setAttribute('style', 'opacity: 0.8');
+    } else if (flipped.includes(elementId)) {
+      clickedTile.setAttribute('src', tile(elementId).path);
+      clickedTile.setAttribute('style', 'opacity: 1.0');
+    } else {
+      clickedTile.setAttribute('src', defaultTileBack);
+      clickedTile.setAttribute('style', 'opacity: 1.0');
+    }
+  }
+}
+
+// CRUD FUNCTIONS =====
 
 // gets player name from local storage
 function getPlayerName(){
   return sessionStorage.getItem('name');
 }
 
-
-// function retrievePlayerInfo() {
-//   var stringifiedPlayerInfo = localStorage.getItem('player');
-//   var parsedPlayerInfo = JSON.parse(stringifiedPlayerInfo);
-//   return parsedPlayerInfo;
-// }
-
+// sets the state based on persisted data
 function setState(){
   localStorage.setItem('flipped', JSON.stringify(flipped));
   localStorage.setItem('tilesRemain', tilesRemain);
   localStorage.setItem('playersSaved', JSON.stringify(playersSaved));
   localStorage.setItem('randomTiles', JSON.stringify(randomTiles));
-  localStorage.setItem('currentPlayerIndex', 1.0);
+  localStorage.setItem('currentPlayerIndex', 0);
   localStorage.setItem('reloadAvailable', 'true');
 }
-
-// function retrievePlayerName() {
-//   var playerInfo = retrievePlayerInfo();
-//   var playerName = playerInfo.name;
-//   return playerName;
-// }
-//
-// function retrieveTurnCount() {
-//   var playerInfo = retrievePlayerInfo();
-//   var turnCount = playerInfo.turns;
-//   return turnCount;
-// }
-//
-// function retrievePoints() {
-//   var playerInfo = retrievePlayerInfo();
-//   var points = playerInfo.points;
-//   return points;
-// }
-//
-// function deletePlayerInfo () {
-//   localStorage.clear();
-// }
 
 // HELPER FUNCTIONS =====
 
@@ -236,34 +236,7 @@ function addPoints(){
   currentPlayer.points++;
 }
 
-
 function createOrUpdatePlayerInfo() {
   var stringifiedPlayerInfo = JSON.stringify(currentPlayer);
   localStorage.setItem('player', stringifiedPlayerInfo);
-}
-
-function checkGameOver(){
-  if(currentPlayer.turns <= 0 || tilesRemain <= 0){
-    localStorage.setItem('remain', tilesRemain);
-    createOrUpdatePlayerInfo();
-    localStorage.removeItem('reloadAvailable');
-    window.location.href = 'results.html';
-  }
-}
-
-function reloadTiles () {
-  for (i = 0; i < randomTiles.length; i++) {
-    var elementId = idIndex[i];
-    var clickedTile = document.getElementById(elementId);
-    if (!tile(elementId).active) {
-      clickedTile.setAttribute('src', tile(elementId).path);
-      clickedTile.setAttribute('style', 'opacity: 0.8');
-    } else if (flipped.includes(elementId)) {
-      clickedTile.setAttribute('src', tile(elementId).path);
-      clickedTile.setAttribute('style', 'opacity: 1.0');
-    } else {
-      clickedTile.setAttribute('src', defaultTileBack);
-      clickedTile.setAttribute('style', 'opacity: 1.0');
-    }
-  }
 }
